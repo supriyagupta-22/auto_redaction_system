@@ -1,0 +1,9 @@
+Loan Application Reference
+
+Applicant Name: Peter Bobal
+Aadhaar Number: 3220 2362 8135
+PAN Number: ITMNM3095H
+Branch: Bhagalpur
+
+This application has been received and is under review. You will be
+notified of the outcome within 7 working days.
