@@ -1,9 +1,9 @@
 Loan Application Reference
 
-Applicant Name: Harish Johal
+Applicant Name: Aadi Kaul
 Aadhaar Number: 8585 9075 7115
 PAN Number: PZCCU7888I
-Branch: Miryalaguda
+Branch: Bhilai
 
 This application has been received and is under review. You will be
 notified of the outcome within 7 working days.

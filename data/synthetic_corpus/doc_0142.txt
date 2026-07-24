@@ -1,9 +1,9 @@
 Loan Application Reference
 
-Applicant Name: Bhavya Yadav
+Applicant Name: Rehaan Nagy
 Aadhaar Number: 2271 7513 6082
 PAN Number: NBZRQ0643R
-Branch: Bilaspur
+Branch: Mirzapur
 
 This application has been received and is under review. You will be
 notified of the outcome within 7 working days.

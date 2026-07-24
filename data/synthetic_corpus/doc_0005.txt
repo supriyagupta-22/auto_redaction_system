@@ -1,9 +1,9 @@
 Loan Application Reference
 
-Applicant Name: Gautami Pillay
+Applicant Name: Jonathan Palla
 Aadhaar Number: 6696 0826 9111
 PAN Number: OHPSF6249B
-Branch: Bellary
+Branch: Dehri
 
 This application has been received and is under review. You will be
 notified of the outcome within 7 working days.

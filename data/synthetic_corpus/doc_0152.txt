@@ -1,9 +1,9 @@
 Loan Application Reference
 
-Applicant Name: Anvi Bava
+Applicant Name: Ishanvi Ray
 Aadhaar Number: 5299 4147 7278
 PAN Number: SYQFQ2369U
-Branch: Lucknow
+Branch: Unnao
 
 This application has been received and is under review. You will be
 notified of the outcome within 7 working days.

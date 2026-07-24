@@ -1,9 +1,9 @@
 Loan Application Reference
 
-Applicant Name: Dhruv Tank
+Applicant Name: Sathvik Choudhry
 Aadhaar Number: 7959 8468 3253
 PAN Number: OTJLY0020E
-Branch: Panvel
+Branch: Vasai-Virar
 
 This application has been received and is under review. You will be
 notified of the outcome within 7 working days.

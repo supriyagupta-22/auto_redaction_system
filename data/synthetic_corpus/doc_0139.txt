@@ -1,9 +1,9 @@
 Loan Application Reference
 
-Applicant Name: Mitali Kota
+Applicant Name: Om Lalla
 Aadhaar Number: 3485 9085 8320
 PAN Number: WDFKO9437Y
-Branch: Tiruchirappalli
+Branch: Mahbubnagar
 
 This application has been received and is under review. You will be
 notified of the outcome within 7 working days.

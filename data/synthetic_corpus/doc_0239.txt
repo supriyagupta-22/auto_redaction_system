@@ -1,9 +1,9 @@
 Loan Application Reference
 
-Applicant Name: Ikbal Toor
+Applicant Name: Abhiram Gaba
 Aadhaar Number: 3265 9857 2074
 PAN Number: AXQGQ0698D
-Branch: Jorhat
+Branch: Jehanabad
 
 This application has been received and is under review. You will be
 notified of the outcome within 7 working days.

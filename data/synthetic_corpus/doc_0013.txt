@@ -1,9 +1,9 @@
 Loan Application Reference
 
-Applicant Name: Jatin Chaudhari
+Applicant Name: Madhavi Rai
 Aadhaar Number: 8858 7422 6756
 PAN Number: HCHHI5126W
-Branch: Jodhpur
+Branch: Pallavaram
 
 This application has been received and is under review. You will be
 notified of the outcome within 7 working days.

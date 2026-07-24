@@ -1,9 +1,9 @@
 Loan Application Reference
 
-Applicant Name: Shaurya Karan
+Applicant Name: Aditya Tella
 Aadhaar Number: 4619 5857 0695
 PAN Number: AYRLK8649P
-Branch: Ballia
+Branch: Nandyal
 
 This application has been received and is under review. You will be
 notified of the outcome within 7 working days.

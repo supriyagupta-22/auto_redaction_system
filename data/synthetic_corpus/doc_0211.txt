@@ -1,9 +1,9 @@
 Loan Application Reference
 
-Applicant Name: Wazir Buch
+Applicant Name: Kala Nayar
 Aadhaar Number: 2795 6181 7437
 PAN Number: LQDDF6248R
-Branch: Patna
+Branch: Guntur
 
 This application has been received and is under review. You will be
 notified of the outcome within 7 working days.

@@ -51,11 +51,11 @@ def generate_aadhaar() -> str:
 
 
 def generate_name() -> str:
-    return fake.name()
+    return fake.name().strip()
 
 
 def generate_location() -> str:
-    return fake.city()
+    return fake.city().strip()
 
 
 ENTITY_GENERATORS = {

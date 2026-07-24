@@ -1,9 +1,9 @@
 Loan Application Reference
 
-Applicant Name: Peter Bobal
+Applicant Name: Omya Comar
 Aadhaar Number: 3220 2362 8135
 PAN Number: ITMNM3095H
-Branch: Bhagalpur
+Branch: Allahabad
 
 This application has been received and is under review. You will be
 notified of the outcome within 7 working days.

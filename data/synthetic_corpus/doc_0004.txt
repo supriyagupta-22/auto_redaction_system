@@ -1,9 +1,9 @@
 Loan Application Reference
 
-Applicant Name: Nicholas Varghese
+Applicant Name: Vasatika De
 Aadhaar Number: 7927 2362 3704
 PAN Number: ZZBFG9883F
-Branch: Ajmer
+Branch: Raichur
 
 This application has been received and is under review. You will be
 notified of the outcome within 7 working days.
