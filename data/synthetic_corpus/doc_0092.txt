@@ -1,9 +1,10 @@
-Loan Application Reference
+Subject: KYC Update Required
 
-Applicant Name: Bhavika Choudhary
-Aadhaar Number: 3030 5332 3099
-PAN Number: ZOEJD3404N
-Branch: Tumkur
+Dear Naksh Reddy,
 
-This application has been received and is under review. You will be
-notified of the outcome within 7 working days.
+Our records indicate that your KYC details require an update. Kindly
+submit a copy of your PAN card (YTNOI4476F) and Aadhaar card (8378 4402 2775)
+at your earliest convenience to our Barasat office.
+
+Thank you,
+Compliance Desk

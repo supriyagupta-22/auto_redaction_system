@@ -1,10 +1,9 @@
-Subject: KYC Update Required
+Loan Application Reference
 
-Dear Nitara Narayan,
+Applicant Name: Nathaniel Salvi
+Aadhaar Number: 8423 4404 6319
+PAN Number: BVCCT8555K
+Branch: Mysore
 
-Our records indicate that your KYC details require an update. Kindly
-submit a copy of your PAN card (PVYCG0859H) and Aadhaar card (3647 6100 9125)
-at your earliest convenience to our Ramgarh office.
-
-Thank you,
-Compliance Desk
+This application has been received and is under review. You will be
+notified of the outcome within 7 working days.

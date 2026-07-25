@@ -1,10 +1,9 @@
-Subject: KYC Update Required
+Loan Application Reference
 
-Dear Timothy Varkey,
+Applicant Name: Manbir Tailor
+Aadhaar Number: 5190 5660 3737
+PAN Number: HFZKY9120H
+Branch: Warangal
 
-Our records indicate that your KYC details require an update. Kindly
-submit a copy of your PAN card (URWRH5572B) and Aadhaar card (5414 5599 9185)
-at your earliest convenience to our Ghaziabad office.
-
-Thank you,
-Compliance Desk
+This application has been received and is under review. You will be
+notified of the outcome within 7 working days.

@@ -1,9 +1,10 @@
-Loan Application Reference
+Subject: KYC Update Required
 
-Applicant Name: Sathvik Sangha
-Aadhaar Number: 6436 6981 8031
-PAN Number: YCECD1290N
-Branch: Bongaigaon
+Dear Prisha Kari,
 
-This application has been received and is under review. You will be
-notified of the outcome within 7 working days.
+Our records indicate that your KYC details require an update. Kindly
+submit a copy of your PAN card (FVHMV3547H) and Aadhaar card (2713 6616 2196)
+at your earliest convenience to our Guna office.
+
+Thank you,
+Compliance Desk

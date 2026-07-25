@@ -113,6 +113,22 @@ Branch: <<LOCATION>>
 
 This application has been received and is under review. You will be
 notified of the outcome within 7 working days.""",
+
+    """The <<LOCATION>> office will remain closed on Monday and Tuesday
+for maintenance. Please redirect all queries to <<NAME>> until further
+notice. Aadhaar <<AADHAAR>> and PAN <<PAN>> have already been verified.""",
+
+    """<<NAME>> submitted the required paperwork on Friday. The case has
+been forwarded to our <<LOCATION>> office for final processing. PAN on
+file: <<PAN>>. Aadhaar on file: <<AADHAAR>>.""",
+
+    """Effective next Wednesday, all correspondence regarding
+<<NAME>>'s application (PAN <<PAN>>, Aadhaar <<AADHAAR>>) should be
+directed to the <<LOCATION>> regional office.""",
+
+    """We regret to inform you that the branch in <<LOCATION>> will be
+shut on Saturday and Sunday. Contact <<NAME>> for urgent matters. For
+reference, PAN <<PAN>> and Aadhaar <<AADHAAR>> are on record.""",
 ]
 
 
@@ -184,4 +200,4 @@ def generate_corpus(n_documents: int = 250, test_ratio: float = 0.2):
 
 
 if __name__ == "__main__":
-    generate_corpus(n_documents=250)
+    generate_corpus(n_documents=400)

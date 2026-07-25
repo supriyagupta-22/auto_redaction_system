@@ -1,9 +1,10 @@
-Loan Application Reference
+Subject: KYC Update Required
 
-Applicant Name: Abdul Cheema
-Aadhaar Number: 2126 3901 4340
-PAN Number: DJIHY0159D
-Branch: Adoni
+Dear Nisha Barad,
 
-This application has been received and is under review. You will be
-notified of the outcome within 7 working days.
+Our records indicate that your KYC details require an update. Kindly
+submit a copy of your PAN card (ISTWZ1353O) and Aadhaar card (3220 2362 8135)
+at your earliest convenience to our Bidhannagar office.
+
+Thank you,
+Compliance Desk

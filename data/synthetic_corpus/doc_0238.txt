@@ -1,9 +1,9 @@
-Loan Application Reference
+Dear Henry Pai,
 
-Applicant Name: Sachi Gole
-Aadhaar Number: 3630 6711 7540
-PAN Number: OINVL9007B
-Branch: Latur
+This letter is to confirm that your account has been successfully
+verified. Your PAN on file is HCMKT2217T and your Aadhaar number in our
+records is 4552 4582 4404. Please visit our branch in Meerut if you
+have any questions regarding this verification.
 
-This application has been received and is under review. You will be
-notified of the outcome within 7 working days.
+Regards,
+Accounts Team

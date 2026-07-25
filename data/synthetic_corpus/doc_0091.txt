@@ -1,9 +1,10 @@
-Loan Application Reference
+Subject: KYC Update Required
 
-Applicant Name: Baghyawati Dua
-Aadhaar Number: 4660 6770 1767
-PAN Number: ICAIJ2114R
-Branch: Coimbatore
+Dear Sarthak Varma,
 
-This application has been received and is under review. You will be
-notified of the outcome within 7 working days.
+Our records indicate that your KYC details require an update. Kindly
+submit a copy of your PAN card (IACKZ1913O) and Aadhaar card (5530 7400 7031)
+at your earliest convenience to our Davanagere office.
+
+Thank you,
+Compliance Desk

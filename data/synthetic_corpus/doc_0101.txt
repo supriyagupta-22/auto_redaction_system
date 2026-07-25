@@ -1,9 +1,9 @@
-Loan Application Reference
+Dear Simon Dhawan,
 
-Applicant Name: Vihaan Sengupta
-Aadhaar Number: 8648 4007 2251
-PAN Number: LTTOC1783Y
-Branch: Solapur
+This letter is to confirm that your account has been successfully
+verified. Your PAN on file is FCPNL0318W and your Aadhaar number in our
+records is 4420 8132 3886. Please visit our branch in Rohtak if you
+have any questions regarding this verification.
 
-This application has been received and is under review. You will be
-notified of the outcome within 7 working days.
+Regards,
+Accounts Team
