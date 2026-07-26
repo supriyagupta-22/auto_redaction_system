@@ -10,6 +10,8 @@ independently testable.
 import re
 from dataclasses import dataclass
 
+from pipeline.verhoeff import is_valid as _verhoeff_is_valid
+
 
 @dataclass
 class Entity:
@@ -25,17 +27,17 @@ AADHAAR_PATTERN = re.compile(r"\b\d{4}\s?\d{4}\s?\d{4}\b")
 
 def _validate_aadhaar(candidate: str) -> bool:
     """
-    Basic sanity checks — not the full UIDAI checksum, just enough to
-    cut obvious false positives:
-    - reject a leading 0 or 1 (UIDAI never issues these)
-    - reject a sequence of all-identical digits
+    Full Verhoeff checksum validation — see verhoeff.py. This replaces
+    the earlier basic sanity checks (leading digit, all-identical
+    digits) with the actual algorithm UIDAI uses, which rejects the
+    large majority of unrelated 12-digit numbers (phone sequences,
+    order IDs, etc.) that happen to match the format but were never
+    generated with a valid check digit.
     """
     digits = candidate.replace(" ", "")
     if digits[0] in "01":
         return False
-    if len(set(digits)) == 1:
-        return False
-    return True
+    return _verhoeff_is_valid(digits)
 
 
 def _validate_pan(candidate: str) -> bool:

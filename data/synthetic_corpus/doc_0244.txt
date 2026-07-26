@@ -1,10 +1,9 @@
-Subject: KYC Update Required
+Loan Application Reference
 
-Dear Oliver Yadav,
+Applicant Name: Yashvi Goda
+Aadhaar Number: 9376 4989 0333
+PAN Number: SKFRN9857H
+Branch: Karimnagar
 
-Our records indicate that your KYC details require an update. Kindly
-submit a copy of your PAN card (MKTAE0885K) and Aadhaar card (8567 4655 4583)
-at your earliest convenience to our Visakhapatnam office.
-
-Thank you,
-Compliance Desk
+This application has been received and is under review. You will be
+notified of the outcome within 7 working days.

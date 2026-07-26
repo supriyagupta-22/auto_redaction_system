@@ -1,9 +1,10 @@
-Loan Application Reference
+Subject: KYC Update Required
 
-Applicant Name: Tara Chad
-Aadhaar Number: 8950 8966 1092
-PAN Number: GRZVF8215C
-Branch: Tirunelveli
+Dear Vansha Gill,
 
-This application has been received and is under review. You will be
-notified of the outcome within 7 working days.
+Our records indicate that your KYC details require an update. Kindly
+submit a copy of your PAN card (HEIGF9368V) and Aadhaar card (9127 9867 7780)
+at your earliest convenience to our Tirupati office.
+
+Thank you,
+Compliance Desk

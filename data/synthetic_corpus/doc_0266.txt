@@ -1,9 +1,10 @@
-Loan Application Reference
+Subject: KYC Update Required
 
-Applicant Name: Aarnav Khosla
-Aadhaar Number: 7427 7848 9682
-PAN Number: HERGG1073P
-Branch: Arrah
+Dear Devika Khanna,
 
-This application has been received and is under review. You will be
-notified of the outcome within 7 working days.
+Our records indicate that your KYC details require an update. Kindly
+submit a copy of your PAN card (TPEII8726L) and Aadhaar card (3531 1274 9124)
+at your earliest convenience to our Jalandhar office.
+
+Thank you,
+Compliance Desk

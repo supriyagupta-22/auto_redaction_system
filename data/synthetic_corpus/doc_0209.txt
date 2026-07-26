@@ -1,9 +1,10 @@
-Loan Application Reference
+Subject: KYC Update Required
 
-Applicant Name: Rajata Gupta
-Aadhaar Number: 7894 4011 4884
-PAN Number: VYBNO6505K
-Branch: Patiala
+Dear Priya Virk,
 
-This application has been received and is under review. You will be
-notified of the outcome within 7 working days.
+Our records indicate that your KYC details require an update. Kindly
+submit a copy of your PAN card (FDOUW3751Y) and Aadhaar card (4651 0571 8108)
+at your earliest convenience to our Bathinda office.
+
+Thank you,
+Compliance Desk

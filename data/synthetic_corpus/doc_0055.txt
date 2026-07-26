@@ -1,10 +1,9 @@
-Subject: KYC Update Required
+Loan Application Reference
 
-Dear Dhriti Panchal,
+Applicant Name: Hiral Soni
+Aadhaar Number: 2333 8406 2800
+PAN Number: RHULK4931W
+Branch: Haldia
 
-Our records indicate that your KYC details require an update. Kindly
-submit a copy of your PAN card (NKQGC7435I) and Aadhaar card (6726 6921 0179)
-at your earliest convenience to our Satara office.
-
-Thank you,
-Compliance Desk
+This application has been received and is under review. You will be
+notified of the outcome within 7 working days.

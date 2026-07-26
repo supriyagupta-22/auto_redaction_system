@@ -18,9 +18,13 @@ Run:
 import json
 import random
 import re
+import sys
 from pathlib import Path
 
 from faker import Faker
+
+sys.path.append(str(Path(__file__).parent.parent))
+from pipeline.verhoeff import generate_check_digit
 
 fake = Faker("en_IN")
 random.seed(42)  # reproducible dataset — keep this fixed for now
@@ -42,11 +46,16 @@ def generate_pan() -> str:
 
 
 def generate_aadhaar() -> str:
-    """12 digits, grouped in 4s. Avoids a leading 0/1, since UIDAI never
-    issues those — keeps the synthetic data realistic."""
+    """12 digits, grouped in 4s: a leading digit from 2-9 (UIDAI never
+    issues a leading 0 or 1) followed by 10 more random digits, with a
+    real Verhoeff check digit computed and appended as the 12th digit
+    — so generated numbers now pass the exact same validation the
+    detector performs, instead of failing it almost every time."""
     first_digit = random.choice("23456789")
-    rest = "".join(random.choices("0123456789", k=11))
-    digits = first_digit + rest
+    middle_digits = "".join(random.choices("0123456789", k=10))
+    digits_without_check = first_digit + middle_digits
+    check_digit = generate_check_digit(digits_without_check)
+    digits = digits_without_check + check_digit
     return f"{digits[0:4]} {digits[4:8]} {digits[8:12]}"
 
 
