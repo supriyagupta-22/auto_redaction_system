@@ -154,14 +154,21 @@ if __name__ == "__main__":
     )
     entities = detect(sample)
 
-    doc_id = log_document("sample.txt", "txt")
-    log_entities(doc_id, entities, mode="redact")
+    doc_id_redact = log_document("sample_redact.txt", "txt")
+    log_entities(doc_id_redact, entities, mode="redact")
+
+    # Also log once in pseudonymize mode, so pseudonym_map actually gets
+    # exercised rather than sitting empty and unverified.
+    doc_id_pseudo = log_document("sample_pseudonymize.txt", "txt")
+    log_entities(doc_id_pseudo, entities, mode="pseudonymize")
 
     conn = _get_connection()
     total_docs = conn.execute("SELECT COUNT(*) FROM documents").fetchone()[0]
     total_events = conn.execute("SELECT COUNT(*) FROM redaction_events").fetchone()[0]
+    total_pseudonyms = conn.execute("SELECT COUNT(*) FROM pseudonym_map").fetchone()[0]
     conn.close()
 
-    print(f"Logged document id {doc_id} with {len(entities)} entities.")
+    print(f"Logged document {doc_id_redact} (redact mode) and {doc_id_pseudo} (pseudonymize mode).")
     print(f"Total documents in DB so far: {total_docs}")
     print(f"Total redaction events in DB so far: {total_events}")
+    print(f"Total unique pseudonym mappings in DB so far: {total_pseudonyms}")
