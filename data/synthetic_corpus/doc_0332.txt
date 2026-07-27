@@ -1,9 +1,9 @@
-Loan Application Reference
+Dear Luke Memon,
 
-Applicant Name: Urvi Shenoy
-Aadhaar Number: 6187 3510 8909
-PAN Number: RJUCY3286Q
-Branch: Guntur
+This letter is to confirm that your account has been successfully
+verified. Your PAN on file is YQYAK4926O and your Aadhaar number in our
+records is 9378 2244 0100. Please visit our branch in Ulhasnagar if you
+have any questions regarding this verification.
 
-This application has been received and is under review. You will be
-notified of the outcome within 7 working days.
+Regards,
+Accounts Team

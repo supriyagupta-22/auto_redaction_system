@@ -40,15 +40,26 @@ def _validate_aadhaar(candidate: str) -> bool:
     return _verhoeff_is_valid(digits)
 
 
+_VALID_PAN_HOLDER_TYPES = set("ABCFGHLJPT")
+
+
 def _validate_pan(candidate: str) -> bool:
     """
-    PAN's structure is already fully constrained by the regex (5
-    letters, 4 digits, 1 letter), so there's little extra to check.
-    This function exists mainly as a place for that validation logic
-    to grow later — e.g. checking the 4th character against known
-    PAN holder-type codes (P = individual, C = company, etc.).
+    Checks the 4th character against the fixed set of PAN holder-type
+    codes published by the Income Tax Department (P=individual,
+    C=company, H=HUF, F=firm, A=association, T=trust, B=body of
+    individuals, L=local authority, J=artificial juridical person,
+    G=government). A purely random string only has a ~38% (10/26)
+    chance of landing on one of these ten letters, so this meaningfully
+    cuts false positives beyond the format regex alone.
+
+    Note: PAN's final character also functions as a check digit in
+    practice, but the Income Tax Department has not publicly documented
+    the checksum formula the way UIDAI has for Aadhaar's Verhoeff
+    digit — validating against an unverified guessed formula would be
+    worse than not validating it at all, so it's deliberately left out.
     """
-    return True
+    return candidate[3] in _VALID_PAN_HOLDER_TYPES
 
 
 def detect_pan(text: str) -> list[Entity]:
@@ -80,8 +91,8 @@ if __name__ == "__main__":
     # quick manual smoke test
     sample = (
         "Applicant Name: Waida Sehgal\n"
-        "Aadhaar Number: 5063 4806 6078\n"
-        "PAN Number: CENDE4808R\n"
+        "Aadhaar Number: 2345 6789 0124\n"
+        "PAN Number: ABCPD1234E\n"
         "Branch: Ranchi"
     )
     for ent in detect(sample):

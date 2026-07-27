@@ -37,12 +37,19 @@ OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 # 1. Entity generators — one function per PII type
 # ---------------------------------------------------------------------
 
+_PAN_HOLDER_TYPES = "ABCFGHLJPT"  # must match _VALID_PAN_HOLDER_TYPES in regex_detectors.py
+
+
 def generate_pan() -> str:
-    """5 letters + 4 digits + 1 letter, e.g. ABCDE1234F"""
-    letters1 = "".join(random.choices("ABCDEFGHIJKLMNOPQRSTUVWXYZ", k=5))
+    """5 letters + 4 digits + 1 letter, e.g. ABCDE1234F. The 4th
+    letter is drawn specifically from the valid PAN holder-type codes
+    so generated PANs pass the same validation the detector performs."""
+    first_three = "".join(random.choices("ABCDEFGHIJKLMNOPQRSTUVWXYZ", k=3))
+    holder_type = random.choice(_PAN_HOLDER_TYPES)
+    fifth_letter = random.choice("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
     digits = "".join(random.choices("0123456789", k=4))
-    letter2 = random.choice("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
-    return f"{letters1}{digits}{letter2}"
+    last_letter = random.choice("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
+    return f"{first_three}{holder_type}{fifth_letter}{digits}{last_letter}"
 
 
 def generate_aadhaar() -> str:

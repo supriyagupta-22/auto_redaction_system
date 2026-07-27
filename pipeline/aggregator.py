@@ -43,8 +43,8 @@ def detect(text: str) -> list[Entity]:
 if __name__ == "__main__":
     sample = (
         "Applicant Name: Waida Sehgal\n"
-        "Aadhaar Number: 5063 4806 6078\n"
-        "PAN Number: CENDE4808R\n"
+        "Aadhaar Number: 2345 6789 0124\n"
+        "PAN Number: ABCPD1234E\n"
         "Branch: Ranchi"
     )
     for ent in detect(sample):

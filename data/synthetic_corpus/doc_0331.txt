@@ -1,9 +1,10 @@
-Loan Application Reference
+Subject: KYC Update Required
 
-Applicant Name: Bhavya Saran
-Aadhaar Number: 5424 7883 4801
-PAN Number: AJODL6939G
-Branch: Tadepalligudem
+Dear Praneel Wason,
 
-This application has been received and is under review. You will be
-notified of the outcome within 7 working days.
+Our records indicate that your KYC details require an update. Kindly
+submit a copy of your PAN card (OROTS1571S) and Aadhaar card (5872 8096 6681)
+at your earliest convenience to our Ulhasnagar office.
+
+Thank you,
+Compliance Desk

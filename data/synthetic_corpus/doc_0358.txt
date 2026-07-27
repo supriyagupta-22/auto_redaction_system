@@ -1,9 +1,10 @@
-Loan Application Reference
+Subject: KYC Update Required
 
-Applicant Name: Ekapad Guha
-Aadhaar Number: 6984 9160 0100
-PAN Number: AGMTA2967B
-Branch: Jehanabad
+Dear Meghana Kothari,
 
-This application has been received and is under review. You will be
-notified of the outcome within 7 working days.
+Our records indicate that your KYC details require an update. Kindly
+submit a copy of your PAN card (JQGTO7326Y) and Aadhaar card (2596 2083 2599)
+at your earliest convenience to our Jamnagar office.
+
+Thank you,
+Compliance Desk

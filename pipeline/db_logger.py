@@ -67,7 +67,7 @@ def init_db():
 
         CREATE TABLE IF NOT EXISTS pseudonym_map (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
-            original_hash TEXT NOT NULL,
+            original_hash TEXT NOT NULL UNIQUE,
             token TEXT NOT NULL,
             created_at TEXT NOT NULL
         );
@@ -124,6 +124,19 @@ def log_entities(document_id: int, entities: list[Entity], mode: str = "redact")
             (document_id, entity.label, original_hash, token, confidence, severity, timestamp),
         )
 
+        if mode == "pseudonymize":
+            # INSERT OR IGNORE: if this exact original value has been
+            # pseudonymized before, silently skip — this is what makes
+            # a later `SELECT COUNT(*) FROM pseudonym_map` a genuine
+            # count of unique individuals/values redacted, not a count
+            # of every occurrence across every document.
+            conn.execute(
+                """INSERT OR IGNORE INTO pseudonym_map
+                   (original_hash, token, created_at)
+                   VALUES (?, ?, ?)""",
+                (original_hash, token, timestamp),
+            )
+
     conn.commit()
     conn.close()
 
@@ -135,8 +148,8 @@ if __name__ == "__main__":
 
     sample = (
         "Applicant Name: Waida Sehgal\n"
-        "Aadhaar Number: 5063 4806 6078\n"
-        "PAN Number: CENDE4808R\n"
+        "Aadhaar Number: 2345 6789 0124\n"
+        "PAN Number: ABCPD1234E\n"
         "Branch: Ranchi"
     )
     entities = detect(sample)

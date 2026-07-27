@@ -1,9 +1,9 @@
-Loan Application Reference
+Dear Theodore Karnik,
 
-Applicant Name: Yachana Misra
-Aadhaar Number: 5842 2431 8204
-PAN Number: THNFB5344L
-Branch: Tirupati
+This letter is to confirm that your account has been successfully
+verified. Your PAN on file is HJCLH8764O and your Aadhaar number in our
+records is 8863 9743 1156. Please visit our branch in Kadapa if you
+have any questions regarding this verification.
 
-This application has been received and is under review. You will be
-notified of the outcome within 7 working days.
+Regards,
+Accounts Team

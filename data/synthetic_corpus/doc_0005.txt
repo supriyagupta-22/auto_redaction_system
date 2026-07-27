@@ -1,9 +1,9 @@
 Loan Application Reference
 
-Applicant Name: Xavier Ghosh
+Applicant Name: Saanvi Palan
 Aadhaar Number: 7499 6619 5634
-PAN Number: SOERJ7154A
-Branch: Mango
+PAN Number: SOELV7154A
+Branch: Bhusawal
 
 This application has been received and is under review. You will be
 notified of the outcome within 7 working days.
