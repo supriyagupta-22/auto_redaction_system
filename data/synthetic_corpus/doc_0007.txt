@@ -1,9 +1,13 @@
-Loan Application Reference
+KYC Verification Letter — Account Summary
 
-Applicant Name: Noah Bali
-Aadhaar Number: 4024 8046 1646
-PAN Number: GRABY4195B
-Branch: Chennai
+Dear Devansh Choudhury,
 
-This application has been received and is under review. You will be
-notified of the outcome within 7 working days.
+This letter confirms that your identity has been verified as part of
+our Standard Verification Process. Your Aadhaar number is 6982 3371 0020
+and PAN number is YQTBA5441B. Kindly visit our Panchkula branch for
+Further Assistance.
+
+Regards,
+Compliance Team
+
+Note that Grace Period may apply in this case. Important Update is required before this can be processed further.

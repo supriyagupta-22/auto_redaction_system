@@ -1,9 +1,11 @@
 Loan Application Reference
 
-Applicant Name: Nirja Garde
-Aadhaar Number: 2996 6991 7142
-PAN Number: LGCHF9174O
-Branch: Farrukhabad
+Applicant Name: Bhavani Nagarajan
+Aadhaar Number: 2444 6166 0554
+PAN Number: CASTZ8915L
+Branch: Mysore
 
 This application has been received and is under review. You will be
 notified of the outcome within 7 working days.
+
+The Grace Period outlined here remains in effect. Supporting Documents is required before this can be processed further.

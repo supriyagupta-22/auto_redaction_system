@@ -1,9 +1,13 @@
-Loan Application Reference
+KYC Verification Letter — Account Summary
 
-Applicant Name: Lopa Raghavan
-Aadhaar Number: 4027 0129 1966
-PAN Number: GBYGV5143L
-Branch: Ambala
+Dear Chandani Sankaran,
 
-This application has been received and is under review. You will be
-notified of the outcome within 7 working days.
+This letter confirms that your identity has been verified as part of
+our Standard Verification Process. Your Aadhaar number is 8921 8791 7516
+and PAN number is FSLJN5231M. Kindly visit our Guntakal branch for
+Further Assistance.
+
+Regards,
+Compliance Team
+
+As per our Account Suspension, this matter will be reviewed shortly. Kindly refer to the Senior Officer for more details.

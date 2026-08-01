@@ -41,18 +41,18 @@
     "ents_p":1.0,
     "ents_r":1.0,
     "ents_per_type":{
-      "NAME":{
+      "LOCATION":{
         "p":1.0,
         "r":1.0,
         "f":1.0
       },
-      "LOCATION":{
+      "NAME":{
         "p":1.0,
         "r":1.0,
         "f":1.0
       }
     },
-    "tok2vec_loss":0.000000189,
-    "ner_loss":0.0000002254
+    "tok2vec_loss":0.0000012248,
+    "ner_loss":0.0000013323
   }
 }

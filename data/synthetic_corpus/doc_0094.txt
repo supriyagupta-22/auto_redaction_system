@@ -1,9 +1,12 @@
-Loan Application Reference
+Subject: KYC Update Required
 
-Applicant Name: Zansi Bhatt
-Aadhaar Number: 9511 3936 8332
-PAN Number: VWZCJ3923M
-Branch: Salem
+Dear Amol Yohannan,
 
-This application has been received and is under review. You will be
-notified of the outcome within 7 working days.
+Our records indicate that your KYC details require an update. Kindly
+submit a copy of your PAN card (JTWBY8345I) and Aadhaar card (3450 8117 8612)
+at your earliest convenience to our Siliguri office.
+
+Thank you,
+Compliance Desk
+
+Refer to the Terms and Conditions section for further clarification.

@@ -1,9 +1,13 @@
-Loan Application Reference
+KYC Verification Letter — Account Summary
 
-Applicant Name: Ekanta Tella
-Aadhaar Number: 5130 8993 1574
-PAN Number: GOCTY0212Y
-Branch: Berhampur
+Dear Ishanvi Ahuja,
 
-This application has been received and is under review. You will be
-notified of the outcome within 7 working days.
+This letter confirms that your identity has been verified as part of
+our Standard Verification Process. Your Aadhaar number is 3039 1076 6903
+and PAN number is QSRPJ4878X. Kindly visit our Nizamabad branch for
+Further Assistance.
+
+Regards,
+Compliance Team
+
+Note that Senior Officer may apply in this case. As per our Customer Service, this matter will be reviewed shortly.

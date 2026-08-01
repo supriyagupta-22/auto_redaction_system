@@ -28,14 +28,15 @@ NOVEL_SENTENCES = [
     "Our new branch in Coimbatore opens next month.",
     "The weather today is quite pleasant.",   # no PII — checks for false positives
     "He said the meeting went well.",         # no PII — checks for false positives
-    "The Mysore division is expanding rapidly.",
-    "We need to send the report to the Trivandrum team.",
-    "Flights to Guwahati are delayed.",
-    "Vikram Desai will be joining the project tomorrow.",
-    "The package was shipped to Ananya Krishnan.",
-    "Our facility in Bharuch is fully operational.",
-    "The audit at the Sivakasi plant concluded.",
-    "Palakkad authorities have approved the request."
+    "KYC Verification Letter",                # regression test: this exact phrase was
+                                               # once wrongly tagged as a NAME (see
+                                               # generate_synthetic.py templates 9-10)
+    "Please find attached the Final Notice regarding your account.",  # was wrongly
+                                               # tagged LOCATION before templates 11-12
+    "Kindly review the Escalation Matrix before proceeding.",  # genuinely new phrase,
+                                               # deliberately excluded from the distractor
+                                               # pool — tests whether the broader,
+                                               # systematic fix actually generalizes
 ]
 
 for sentence in NOVEL_SENTENCES:

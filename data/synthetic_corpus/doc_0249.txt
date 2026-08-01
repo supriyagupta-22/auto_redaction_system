@@ -1,9 +1,11 @@
 Loan Application Reference
 
-Applicant Name: Zayan Varughese
-Aadhaar Number: 9376 4989 0333
-PAN Number: SKFPO9857H
-Branch: Thane
+Applicant Name: Nirja Chadha
+Aadhaar Number: 9268 8997 0244
+PAN Number: GTTLN3802N
+Branch: Bhubaneswar
 
 This application has been received and is under review. You will be
 notified of the outcome within 7 working days.
+
+The Technical Support outlined here remains in effect. Kindly refer to the Permanent Employee for more details.

@@ -1,9 +1,11 @@
 Loan Application Reference
 
-Applicant Name: Omya Aggarwal
-Aadhaar Number: 3767 6500 0388
-PAN Number: BDXJB3606R
-Branch: Siliguri
+Applicant Name: Amara Korpal
+Aadhaar Number: 3151 5811 2156
+PAN Number: WAZPJ3549A
+Branch: Bikaner
 
 This application has been received and is under review. You will be
 notified of the outcome within 7 working days.
+
+Note that Quality Assurance may apply in this case.

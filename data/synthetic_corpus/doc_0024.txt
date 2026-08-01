@@ -1,9 +1,12 @@
-Loan Application Reference
+Subject: KYC Update Required
 
-Applicant Name: Faqid Dixit
-Aadhaar Number: 4304 2819 6199
-PAN Number: HSKJP2539Q
-Branch: Raebareli
+Dear Barkha Bhardwaj,
 
-This application has been received and is under review. You will be
-notified of the outcome within 7 working days.
+Our records indicate that your KYC details require an update. Kindly
+submit a copy of your PAN card (ZOUBV8137S) and Aadhaar card (7021 4104 3546)
+at your earliest convenience to our Kozhikode office.
+
+Thank you,
+Compliance Desk
+
+Note that Supporting Documents may apply in this case.

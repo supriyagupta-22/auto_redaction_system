@@ -1,9 +1,11 @@
 Loan Application Reference
 
-Applicant Name: Vivaan Thaker
-Aadhaar Number: 6961 6526 5608
-PAN Number: KSCCA9916P
-Branch: Gaya
+Applicant Name: Rehaan Grover
+Aadhaar Number: 5965 2962 5615
+PAN Number: WAFCY8892S
+Branch: Buxar
 
 This application has been received and is under review. You will be
 notified of the outcome within 7 working days.
+
+Refer to the Prompt Response section for further clarification.

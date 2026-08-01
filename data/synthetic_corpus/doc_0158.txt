@@ -1,10 +1,11 @@
-Subject: KYC Update Required
+Loan Application Reference
 
-Dear Jagat Kakar,
+Applicant Name: Bhavini Natarajan
+Aadhaar Number: 5782 2261 1968
+PAN Number: RPTPB8338S
+Branch: Secunderabad
 
-Our records indicate that your KYC details require an update. Kindly
-submit a copy of your PAN card (NSIBY3456N) and Aadhaar card (6840 1300 2799)
-at your earliest convenience to our Pudukkottai office.
+This application has been received and is under review. You will be
+notified of the outcome within 7 working days.
 
-Thank you,
-Compliance Desk
+This is subject to Late Fee as per company policy. As per our Additional Information, this matter will be reviewed shortly.

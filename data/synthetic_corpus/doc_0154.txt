@@ -1,9 +1,11 @@
 Loan Application Reference
 
-Applicant Name: Qadim Bandi
-Aadhaar Number: 9930 2456 4670
-PAN Number: CTFHL8925W
-Branch: Amroha
+Applicant Name: Madhavi Oak
+Aadhaar Number: 7003 9657 5985
+PAN Number: QLFPJ1756T
+Branch: Kota
 
 This application has been received and is under review. You will be
 notified of the outcome within 7 working days.
+
+Note that Duly Signed may apply in this case.

@@ -1,10 +1,11 @@
-Subject: KYC Update Required
+Loan Application Reference
 
-Dear Abeer De,
+Applicant Name: Kashvi Bassi
+Aadhaar Number: 2249 7285 6108
+PAN Number: JPEJS5382W
+Branch: Tirunelveli
 
-Our records indicate that your KYC details require an update. Kindly
-submit a copy of your PAN card (JGCTV7250A) and Aadhaar card (5039 1908 7621)
-at your earliest convenience to our Hindupur office.
+This application has been received and is under review. You will be
+notified of the outcome within 7 working days.
 
-Thank you,
-Compliance Desk
+Note that Technical Support may apply in this case.

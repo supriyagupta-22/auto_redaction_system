@@ -145,6 +145,54 @@ directed to the <<LOCATION>> regional office.""",
     """We regret to inform you that the branch in <<LOCATION>> will be
 shut on Saturday and Sunday. Contact <<NAME>> for urgent matters. For
 reference, PAN <<PAN>> and Aadhaar <<AADHAAR>> are on record.""",
+
+    """KYC Verification Letter — Account Summary
+
+Dear <<NAME>>,
+
+This letter confirms that your identity has been verified as part of
+our Standard Verification Process. Your Aadhaar number is <<AADHAAR>>
+and PAN number is <<PAN>>. Kindly visit our <<LOCATION>> branch for
+Further Assistance.
+
+Regards,
+Compliance Team""",
+
+    """Employment Verification Certificate
+
+To Whom It May Concern,
+
+This is to certify that <<NAME>> is a Permanent Employee based out of
+our <<LOCATION>> office, as per our Internal Records. PAN: <<PAN>>,
+Aadhaar: <<AADHAAR>>. This Certificate remains valid until further
+notice.
+
+Authorized Signatory""",
+
+    """Dear <<NAME>>,
+
+Please find attached the Final Notice regarding your account maintained
+at our <<LOCATION>> branch. Kindly submit your PAN (<<PAN>>) and
+Aadhaar (<<AADHAAR>>) at the earliest to avoid Service Interruption.
+
+Regards,
+Recovery Team""",
+
+    """Subject: Important Update
+
+Dear <<NAME>>,
+
+This is a Courtesy Reminder that your documents are pending submission
+at the <<LOCATION>> office. Your Aadhaar (<<AADHAAR>>) and PAN
+(<<PAN>>) will be required. Please Note that delays may result in
+Account Suspension.
+
+Regards,
+Support Team""",
+
+    """Please forward all correspondence regarding <<NAME>> to our
+<<LOCATION>> office. PAN: <<PAN>>. Aadhaar: <<AADHAAR>>. Please Note
+that response times may vary during Peak Season.""",
 ]
 
 
@@ -153,6 +201,56 @@ reference, PAN <<PAN>> and Aadhaar <<AADHAAR>> are on record.""",
 # ---------------------------------------------------------------------
 
 TOKEN_PATTERN = re.compile(r"<<(\w+)>>")
+
+# A broad pool of generic, two/three-word capitalized business phrases
+# that are deliberately NOT entities. 1-2 of these get appended (as
+# full sentences) to EVERY generated document, giving the NER model
+# far broader and more randomized exposure to "capitalized phrase that
+# isn't a name or location" than a handful of hand-picked phrases in
+# a couple of templates ever could — the goal is teaching the general
+# pattern, not memorizing a growing list of specific exceptions.
+#
+# Note: "Service Agreement" / "Escalation Matrix" are deliberately
+# excluded from this pool — they're used in test_ner_generalization.py
+# as held-out phrases to check whether this actually generalizes.
+DISTRACTOR_PHRASES = [
+    "Final Notice", "Rental Agreement", "Terms and Conditions", "Account Summary",
+    "Important Update", "Please Note", "For Your Information", "Standard Procedure",
+    "Internal Records", "Further Assistance", "Permanent Employee", "Courtesy Reminder",
+    "Account Suspension", "Important Notice", "Reference Number", "Application Form",
+    "Processing Fee", "Customer Service", "Technical Support", "Quality Assurance",
+    "Human Resources", "General Manager", "Senior Officer", "Branch Manager",
+    "Head Office", "Registered Address", "Contact Information", "Payment Received",
+    "Outstanding Balance", "Due Date", "Grace Period", "Late Fee",
+    "Subject To Change", "Kindly Note", "Please Ensure", "Immediate Action",
+    "Prompt Response", "Necessary Action", "Required Documents", "Supporting Documents",
+    "Valid Proof", "Original Copy", "Self Attested", "Duly Signed",
+    "Complete Application", "Pending Approval", "Under Review", "Further Details",
+    "Additional Information", "Terms Apply",
+]
+
+DISTRACTOR_SENTENCE_FRAMES = [
+    "Note that {phrase} may apply in this case.",
+    "This is subject to {phrase} as per company policy.",
+    "Kindly refer to the {phrase} for more details.",
+    "{phrase} is required before this can be processed further.",
+    "As per our {phrase}, this matter will be reviewed shortly.",
+    "The {phrase} outlined here remains in effect.",
+    "Refer to the {phrase} section for further clarification.",
+]
+
+
+def add_distractor_sentences(text: str, n: int = 2) -> str:
+    """Appends n randomly chosen distractor sentences to the END of a
+    document. Always appended after all existing content — never
+    inserted earlier — so none of the already-computed entity offsets
+    are disturbed."""
+    sentences = []
+    for _ in range(n):
+        phrase = random.choice(DISTRACTOR_PHRASES)
+        frame = random.choice(DISTRACTOR_SENTENCE_FRAMES)
+        sentences.append(frame.format(phrase=phrase))
+    return text + "\n\n" + " ".join(sentences)
 
 
 def fill_template(template: str):
@@ -199,6 +297,7 @@ def generate_corpus(n_documents: int = 250, test_ratio: float = 0.2):
         for i in range(1, n_documents + 1):
             template = random.choice(TEMPLATES)
             text, entities = fill_template(template)
+            text = add_distractor_sentences(text, n=random.randint(1, 2))
 
             doc_filename = f"doc_{i:04d}.txt"
             (OUTPUT_DIR / doc_filename).write_text(text, encoding="utf-8")
@@ -216,4 +315,4 @@ def generate_corpus(n_documents: int = 250, test_ratio: float = 0.2):
 
 
 if __name__ == "__main__":
-    generate_corpus(n_documents=400)
+    generate_corpus(n_documents=650)

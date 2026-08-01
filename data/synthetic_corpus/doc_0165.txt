@@ -1,9 +1,13 @@
-Loan Application Reference
+KYC Verification Letter — Account Summary
 
-Applicant Name: Luke Banerjee
-Aadhaar Number: 6444 3310 7078
-PAN Number: BWJPD2662O
-Branch: Farrukhabad
+Dear Triveni Dua,
 
-This application has been received and is under review. You will be
-notified of the outcome within 7 working days.
+This letter confirms that your identity has been verified as part of
+our Standard Verification Process. Your Aadhaar number is 4547 8465 9428
+and PAN number is CIKCJ0571J. Kindly visit our Kollam branch for
+Further Assistance.
+
+Regards,
+Compliance Team
+
+Note that Please Ensure may apply in this case. Complete Application is required before this can be processed further.
