@@ -2,14 +2,15 @@
 app.py
 
 Streamlit entry point. Accepts one or more documents (.txt, .pdf,
-.docx), detects and redacts PII in each, and logs every run to SQLite.
+.docx), detects PII, lets the user choose which categories to
+actually redact and in which mode, and logs every run to SQLite.
 """
 
 from collections import Counter
 
 import streamlit as st
 
-from pipeline.aggregator import detect
+from pipeline.aggregator import detect, filter_by_category
 from pipeline.db_logger import init_db, log_document, log_entities
 from pipeline.ingestion import extract_text
 from pipeline.masking import mask
@@ -21,11 +22,30 @@ init_db()
 st.title("Automated Document Redaction System")
 st.write("Upload one or more documents to detect and redact PII (Aadhaar, PAN, Names, Locations).")
 
-mode = st.radio(
-    "Redaction mode",
-    options=["redact", "pseudonymize"],
-    format_func=lambda m: "Fixed mask ([REDACTED])" if m == "redact" else "Pseudonymized token",
-)
+with st.sidebar:
+    st.header("Settings")
+
+    mode = st.radio(
+        "Redaction mode",
+        options=["redact", "pseudonymize"],
+        format_func=lambda m: "Fixed mask ([REDACTED])" if m == "redact" else "Pseudonymized token",
+    )
+
+    st.subheader("Categories to redact")
+    redact_aadhaar = st.checkbox("Aadhaar", value=True)
+    redact_pan = st.checkbox("PAN", value=True)
+    redact_name = st.checkbox("Names", value=True)
+    redact_location = st.checkbox("Locations", value=True)
+
+    enabled_categories = set()
+    if redact_aadhaar:
+        enabled_categories.add("AADHAAR")
+    if redact_pan:
+        enabled_categories.add("PAN")
+    if redact_name:
+        enabled_categories.add("NAME")
+    if redact_location:
+        enabled_categories.add("LOCATION")
 
 uploaded_files = st.file_uploader(
     "Choose one or more documents",
@@ -34,6 +54,9 @@ uploaded_files = st.file_uploader(
 )
 
 if uploaded_files:
+    if not enabled_categories:
+        st.warning("No redaction categories are selected in the sidebar — documents will be shown unredacted.")
+
     for i, uploaded_file in enumerate(uploaded_files):
         st.divider()
         st.markdown(f"### {uploaded_file.name}")
@@ -48,7 +71,8 @@ if uploaded_files:
             st.warning("No extractable text found in this file — it may be a scanned/image-only document.")
             continue
 
-        entities = detect(text)
+        all_entities = detect(text)
+        entities = filter_by_category(all_entities, enabled_categories)
         redacted_text = mask(text, entities, mode=mode)
 
         document_id = log_document(uploaded_file.name, uploaded_file.name.split(".")[-1])
@@ -70,9 +94,16 @@ if uploaded_files:
 
         st.subheader("Summary")
         counts = Counter(entity.label for entity in entities)
-        st.write(f"Detected {len(entities)} entities:")
+        st.write(f"Redacted {len(entities)} entities (selected categories only):")
         for label, count in counts.items():
             st.write(f"- **{label}**: {count}")
+
+        skipped = len(all_entities) - len(entities)
+        if skipped > 0:
+            st.caption(
+                f"{skipped} additional entit{'y was' if skipped == 1 else 'ies were'} "
+                f"detected but left unredacted because their category is disabled in the sidebar."
+            )
 
         st.download_button(
             label="Download redacted document",
