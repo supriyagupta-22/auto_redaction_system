@@ -31,9 +31,21 @@ with st.sidebar:
         format_func=lambda m: "Fixed mask ([REDACTED])" if m == "redact" else "Pseudonymized token",
     )
 
-    st.subheader("Categories to redact")
+    st.subheader("Government IDs")
     redact_aadhaar = st.checkbox("Aadhaar", value=True)
     redact_pan = st.checkbox("PAN", value=True)
+    redact_passport = st.checkbox("Passport", value=True)
+
+    st.subheader("Financial")
+    redact_card = st.checkbox("Credit/Debit Card", value=True)
+    redact_gstin = st.checkbox("GSTIN", value=True)
+    redact_ifsc = st.checkbox("IFSC Code", value=True)
+
+    st.subheader("Contact Info")
+    redact_email = st.checkbox("Email Address", value=True)
+    redact_phone = st.checkbox("Phone Number", value=True)
+
+    st.subheader("AI-Detected")
     redact_name = st.checkbox("Names", value=True)
     redact_location = st.checkbox("Locations", value=True)
 
@@ -42,6 +54,18 @@ with st.sidebar:
         enabled_categories.add("AADHAAR")
     if redact_pan:
         enabled_categories.add("PAN")
+    if redact_passport:
+        enabled_categories.add("PASSPORT")
+    if redact_card:
+        enabled_categories.add("CARD")
+    if redact_gstin:
+        enabled_categories.add("GSTIN")
+    if redact_ifsc:
+        enabled_categories.add("IFSC")
+    if redact_email:
+        enabled_categories.add("EMAIL")
+    if redact_phone:
+        enabled_categories.add("PHONE")
     if redact_name:
         enabled_categories.add("NAME")
     if redact_location:

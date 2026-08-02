@@ -23,12 +23,18 @@ DB_PATH = Path(__file__).parent.parent / "db" / "redaction_log.sqlite"
 # entities don't currently expose a real per-entity confidence score
 # through spaCy's standard .ents output, so NULL is logged rather than
 # inventing a number that was never actually computed.
-REGEX_LABELS = {"AADHAAR", "PAN"}
+REGEX_LABELS = {"AADHAAR", "PAN", "EMAIL", "PHONE", "GSTIN", "IFSC", "CARD", "PASSPORT"}
 
 SEVERITY_MAP = {
     "AADHAAR": "CRITICAL",
     "PAN": "CRITICAL",
+    "CARD": "CRITICAL",
+    "PASSPORT": "CRITICAL",
+    "GSTIN": "HIGH",
+    "PHONE": "HIGH",
+    "EMAIL": "HIGH",
     "NAME": "HIGH",
+    "IFSC": "LOW",   # identifies a bank branch, not a person — see note in ingestion discussion
     "LOCATION": "LOW",
 }
 
