@@ -8,16 +8,44 @@ actually redact and in which mode, and logs every run to SQLite.
 
 from collections import Counter
 
+import plotly.graph_objects as go
 import streamlit as st
 
 from pipeline.aggregator import detect, filter_by_category
-from pipeline.db_logger import init_db, log_document, log_entities
+from pipeline.db_logger import (
+    export_csv,
+    get_all_time_stats,
+    init_db,
+    log_document,
+    log_entities,
+    severity_counts,
+)
 from pipeline.ingestion import extract_text
 from pipeline.masking import mask
 
 st.set_page_config(page_title="Auto Redaction System", layout="wide")
 
 init_db()
+
+
+def build_severity_chart(counts: dict) -> go.Figure:
+    """Builds a small color-coded bar chart from a {severity: count}
+    dict — red for CRITICAL, orange for HIGH, green for LOW — so
+    risk level is visually obvious at a glance, not just a number."""
+    order = ["CRITICAL", "HIGH", "LOW"]
+    colors = {"CRITICAL": "#d62728", "HIGH": "#ff7f0e", "LOW": "#2ca02c"}
+    fig = go.Figure(data=[go.Bar(
+        x=order,
+        y=[counts.get(s, 0) for s in order],
+        marker_color=[colors[s] for s in order],
+    )])
+    fig.update_layout(
+        height=260,
+        margin=dict(l=10, r=10, t=10, b=10),
+        yaxis_title="Entities",
+    )
+    return fig
+
 
 st.title("Automated Document Redaction System")
 st.write("Upload one or more documents to detect and redact PII (Aadhaar, PAN, Names, Locations).")
@@ -129,10 +157,45 @@ if uploaded_files:
                 f"detected but left unredacted because their category is disabled in the sidebar."
             )
 
-        st.download_button(
-            label="Download redacted document",
-            data=redacted_text,
-            file_name=f"redacted_{uploaded_file.name}.txt",
-            mime="text/plain",
-            key=f"download_{i}_{uploaded_file.name}",
-        )
+        st.subheader("Risk Summary")
+        risk_counts = severity_counts(entities)
+        chart_col, legend_col = st.columns([2, 1])
+        with chart_col:
+            st.plotly_chart(build_severity_chart(risk_counts), use_container_width=True, key=f"chart_{i}_{uploaded_file.name}")
+        with legend_col:
+            st.metric("CRITICAL", risk_counts["CRITICAL"])
+            st.metric("HIGH", risk_counts["HIGH"])
+            st.metric("LOW", risk_counts["LOW"])
+
+        download_col1, download_col2 = st.columns(2)
+        with download_col1:
+            st.download_button(
+                label="Download redacted document",
+                data=redacted_text,
+                file_name=f"redacted_{uploaded_file.name}.txt",
+                mime="text/plain",
+                key=f"download_{i}_{uploaded_file.name}",
+            )
+        with download_col2:
+            st.download_button(
+                label="Download audit report (CSV)",
+                data=export_csv(document_id),
+                file_name=f"audit_{uploaded_file.name}.csv",
+                mime="text/csv",
+                key=f"csv_{i}_{uploaded_file.name}",
+            )
+
+st.divider()
+with st.expander("All-time dashboard (across every document ever processed)"):
+    stats = get_all_time_stats()
+    col_a, col_b = st.columns(2)
+    with col_a:
+        st.metric("Total documents processed", stats["total_documents"])
+        st.write("**By severity:**")
+        for severity in ["CRITICAL", "HIGH", "LOW"]:
+            st.write(f"- {severity}: {stats['by_severity'].get(severity, 0)}")
+    with col_b:
+        st.metric("Total entities redacted", stats["total_events"])
+        st.write("**By category:**")
+        for category, count in sorted(stats["by_category"].items()):
+            st.write(f"- {category}: {count}")

@@ -8,7 +8,9 @@ from later — nothing downstream should write to the database except
 through this module.
 """
 
+import csv
 import hashlib
+import io
 import sqlite3
 from datetime import datetime, timezone
 from pathlib import Path
@@ -145,6 +147,61 @@ def log_entities(document_id: int, entities: list[Entity], mode: str = "redact")
 
     conn.commit()
     conn.close()
+
+
+def severity_counts(entities) -> dict:
+    """Returns {severity: count} for a list of entities, using the
+    same SEVERITY_MAP applied when logging to the database — so the
+    dashboard and the audit log always agree with each other."""
+    counts = {"CRITICAL": 0, "HIGH": 0, "LOW": 0}
+    for entity in entities:
+        severity = SEVERITY_MAP.get(entity.label, "LOW")
+        counts[severity] += 1
+    return counts
+
+
+def export_csv(document_id: int) -> str:
+    """Returns a CSV-formatted string of every redaction event logged
+    for a given document — ready to hand straight to Streamlit's
+    download_button. Includes original_hash (safe to include; it's a
+    one-way hash, not the original value) so the audit trail is
+    complete without ever exposing the underlying PII."""
+    conn = _get_connection()
+    rows = conn.execute(
+        """SELECT entity_type, severity, confidence_score, replacement_token,
+                  original_hash, timestamp
+           FROM redaction_events WHERE document_id = ? ORDER BY id""",
+        (document_id,),
+    ).fetchall()
+    conn.close()
+
+    output = io.StringIO()
+    writer = csv.writer(output)
+    writer.writerow(["entity_type", "severity", "confidence_score", "replacement_token", "original_hash", "timestamp"])
+    writer.writerows(rows)
+    return output.getvalue()
+
+
+def get_all_time_stats() -> dict:
+    """Returns aggregate counts across every document ever logged to
+    this database — a session-independent view for a small 'all-time'
+    dashboard, not just the files uploaded in the current run."""
+    conn = _get_connection()
+    total_docs = conn.execute("SELECT COUNT(*) FROM documents").fetchone()[0]
+    total_events = conn.execute("SELECT COUNT(*) FROM redaction_events").fetchone()[0]
+    by_severity = dict(conn.execute(
+        "SELECT severity, COUNT(*) FROM redaction_events GROUP BY severity"
+    ).fetchall())
+    by_category = dict(conn.execute(
+        "SELECT entity_type, COUNT(*) FROM redaction_events GROUP BY entity_type"
+    ).fetchall())
+    conn.close()
+    return {
+        "total_documents": total_docs,
+        "total_events": total_events,
+        "by_severity": by_severity,
+        "by_category": by_category,
+    }
 
 
 if __name__ == "__main__":
