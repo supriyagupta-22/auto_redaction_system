@@ -4,12 +4,24 @@ ingestion.py
 Extracts plain text from an uploaded file, regardless of its original
 format. Everything downstream of this module (detection, masking,
 logging) only ever deals with plain text — this is the one place in
-the whole pipeline that needs to know PDF, DOCX, and TXT are different.
+the whole pipeline that needs to know PDF, DOCX, TXT, and images are
+different.
 """
 
 import PyPDF2
 import pdfplumber
+import pymupdf
+import pytesseract
 from docx import Document
+from PIL import Image
+
+# Windows does not reliably add Tesseract to PATH after installing it,
+# so pytesseract needs to be told exactly where the binary lives.
+# Confirmed path on this machine via PowerShell Get-ChildItem — if you
+# reinstall elsewhere later, update this one line to match.
+pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
+
+IMAGE_EXTENSIONS = (".png", ".jpg", ".jpeg", ".tiff", ".bmp")
 
 
 def extract_text(uploaded_file) -> str:
@@ -26,14 +38,27 @@ def extract_text(uploaded_file) -> str:
     if filename.endswith(".docx"):
         return _extract_docx(uploaded_file)
 
-    raise ValueError(f"Unsupported file type: {filename}. Supported: .txt, .pdf, .docx")
+    if filename.endswith(IMAGE_EXTENSIONS):
+        return _extract_image(uploaded_file)
+
+    raise ValueError(
+        f"Unsupported file type: {filename}. "
+        f"Supported: .txt, .pdf, .docx, {', '.join(IMAGE_EXTENSIONS)}"
+    )
+
+
+def _extract_image(uploaded_file) -> str:
+    """Runs Tesseract OCR directly on an uploaded image file."""
+    image = Image.open(uploaded_file)
+    return pytesseract.image_to_string(image).strip()
 
 
 def _extract_pdf(uploaded_file) -> str:
     """Tries pdfplumber first (better text-extraction fidelity). Falls
-    back to PyPDF2 if pdfplumber can't parse the file at all — some
-    malformed or unusually encoded PDFs trip up one library but not
-    the other."""
+    back to PyPDF2 if pdfplumber can't parse the file at all. If BOTH
+    come back empty — a scanned/image-only PDF with no real text
+    layer — falls back to OCR: rasterize each page and run Tesseract
+    on it, using the same engine as a standalone image upload."""
     try:
         with pdfplumber.open(uploaded_file) as pdf:
             pages = [page.extract_text() or "" for page in pdf.pages]
@@ -43,10 +68,33 @@ def _extract_pdf(uploaded_file) -> str:
     except Exception:
         pass  # fall through to PyPDF2
 
-    uploaded_file.seek(0)  # reset the file pointer before the second attempt
-    reader = PyPDF2.PdfReader(uploaded_file)
-    pages = [page.extract_text() or "" for page in reader.pages]
-    return "\n".join(pages).strip()
+    uploaded_file.seek(0)
+    try:
+        reader = PyPDF2.PdfReader(uploaded_file)
+        pages = [page.extract_text() or "" for page in reader.pages]
+        text = "\n".join(pages).strip()
+        if text:
+            return text
+    except Exception:
+        pass  # fall through to OCR
+
+    uploaded_file.seek(0)
+    return _extract_pdf_via_ocr(uploaded_file)
+
+
+def _extract_pdf_via_ocr(uploaded_file) -> str:
+    """Rasterizes each PDF page to an image at 200 DPI and runs
+    Tesseract on it. Used only when normal text extraction found
+    nothing — i.e. the PDF is genuinely scanned/image-only."""
+    pdf_bytes = uploaded_file.read()
+    doc = pymupdf.open(stream=pdf_bytes, filetype="pdf")
+    page_texts = []
+    for page in doc:
+        pix = page.get_pixmap(dpi=200)
+        image = Image.frombytes("RGB", (pix.width, pix.height), pix.samples)
+        page_texts.append(pytesseract.image_to_string(image))
+    doc.close()
+    return "\n".join(page_texts).strip()
 
 
 def _extract_docx(uploaded_file) -> str:

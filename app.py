@@ -101,7 +101,7 @@ with st.sidebar:
 
 uploaded_files = st.file_uploader(
     "Choose one or more documents",
-    type=["txt", "pdf", "docx"],
+    type=["txt", "pdf", "docx", "png", "jpg", "jpeg", "tiff", "bmp"],
     accept_multiple_files=True,
 )
 
