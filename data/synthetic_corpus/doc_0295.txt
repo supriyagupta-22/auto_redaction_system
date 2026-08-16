@@ -1,12 +1,11 @@
-Subject: KYC Update Required
+Loan Application Reference
 
-Dear Darsh Aurora,
+Applicant Name: Jeremiah Shetty
+Aadhaar Number: 5801 9730 9370
+PAN Number: RBVCA1120N
+Branch: Raipur
 
-Our records indicate that your KYC details require an update. Kindly
-submit a copy of your PAN card (GUBGS4973R) and Aadhaar card (4133 3056 0583)
-at your earliest convenience to our Parbhani office.
+This application has been received and is under review. You will be
+notified of the outcome within 7 working days.
 
-Thank you,
-Compliance Desk
-
-Kindly refer to the Payment Received for more details.
+Branch Manager is required before this can be processed further. Proceessing.

@@ -1,11 +1,13 @@
-Loan Application Reference
+KYC Verification Letter — Account Summary
 
-Applicant Name: Devansh Palla
-Aadhaar Number: 3458 2440 4824
-PAN Number: LFYCS8409X
-Branch: Davanagere
+Dear Advika Kar,
 
-This application has been received and is under review. You will be
-notified of the outcome within 7 working days.
+This letter confirms that your identity has been verified as part of
+our Standard Verification Process. Your Aadhaar number is 2932 6185 8319
+and PAN number is FOMHZ3082E. Kindly visit our Rampur branch for
+Further Assistance.
 
-As per our Payment Received, this matter will be reviewed shortly.
+Regards,
+Compliance Team
+
+For Your Information is required before this can be processed further. Acc0unt Submis5ion.

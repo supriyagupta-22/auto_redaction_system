@@ -1,13 +1,11 @@
-KYC Verification Letter — Account Summary
+Loan Application Reference
 
-Dear Anmol Suri,
+Applicant Name: Riya Jaggi
+Aadhaar Number: 2327 9249 3521
+PAN Number: TMNLG2187M
+Branch: Bellary
 
-This letter confirms that your identity has been verified as part of
-our Standard Verification Process. Your Aadhaar number is 8912 3143 3404
-and PAN number is VQJBG4749W. Kindly visit our Mumbai branch for
-Further Assistance.
+This application has been received and is under review. You will be
+notified of the outcome within 7 working days.
 
-Regards,
-Compliance Team
-
-Note that Processing Fee may apply in this case.
+This is subject to Supporting Documents as per company policy. Identifcation.

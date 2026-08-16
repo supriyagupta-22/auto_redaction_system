@@ -1,3 +1,5 @@
+
+Requirements · TXT
 streamlit>=1.32
 spacy>=3.7
 pdfplumber>=0.10
@@ -8,5 +10,7 @@ pytesseract>=0.3.10
 Pillow>=10.0
 PyMuPDF>=1.24
 scikit-learn>=1.4
+opencv-python>=4.9
 plotly>=5.20
 pandas>=2.2
+ 

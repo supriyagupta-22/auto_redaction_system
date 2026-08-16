@@ -8,6 +8,8 @@ the whole pipeline that needs to know PDF, DOCX, TXT, and images are
 different.
 """
 
+import cv2
+import numpy as np
 import PyPDF2
 import pdfplumber
 import pymupdf
@@ -15,13 +17,28 @@ import pytesseract
 from docx import Document
 from PIL import Image
 
-# Windows does not reliably add Tesseract to PATH after installing it,
-# so pytesseract needs to be told exactly where the binary lives.
-# Confirmed path on this machine via PowerShell Get-ChildItem — if you
-# reinstall elsewhere later, update this one line to match.
 pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
 
 IMAGE_EXTENSIONS = (".png", ".jpg", ".jpeg", ".tiff", ".bmp")
+
+# Below this many extracted characters, OCR is flagged as low-confidence
+# in the UI — not because this threshold is scientifically derived, but
+# because near-empty OCR output is a reliable practical signal that
+# something (resolution, blur, lighting) went wrong upstream.
+LOW_CONFIDENCE_CHAR_THRESHOLD = 20
+
+
+def _preprocess_for_ocr(image: Image.Image) -> Image.Image:
+    """Light, empirically-tested preprocessing: grayscale + 2x upscale.
+    Testing against deliberately degraded sample scans found this
+    combination never made OCR output worse, while more aggressive
+    techniques (adaptive thresholding, denoising, sharpening) actively
+    hurt results on blurred input by amplifying artifacts into false
+    edges. This is intentionally conservative rather than maximal."""
+    img_array = np.array(image.convert("RGB"))
+    gray = cv2.cvtColor(img_array, cv2.COLOR_RGB2GRAY)
+    gray = cv2.resize(gray, None, fx=2, fy=2, interpolation=cv2.INTER_CUBIC)
+    return Image.fromarray(gray)
 
 
 def extract_text(uploaded_file) -> str:
@@ -48,9 +65,11 @@ def extract_text(uploaded_file) -> str:
 
 
 def _extract_image(uploaded_file) -> str:
-    """Runs Tesseract OCR directly on an uploaded image file."""
+    """Runs Tesseract OCR on an uploaded image file, after light
+    preprocessing (see _preprocess_for_ocr)."""
     image = Image.open(uploaded_file)
-    return pytesseract.image_to_string(image).strip()
+    processed = _preprocess_for_ocr(image)
+    return pytesseract.image_to_string(processed).strip()
 
 
 def _extract_pdf(uploaded_file) -> str:
@@ -92,7 +111,8 @@ def _extract_pdf_via_ocr(uploaded_file) -> str:
     for page in doc:
         pix = page.get_pixmap(dpi=200)
         image = Image.frombytes("RGB", (pix.width, pix.height), pix.samples)
-        page_texts.append(pytesseract.image_to_string(image))
+        processed = _preprocess_for_ocr(image)
+        page_texts.append(pytesseract.image_to_string(processed))
     doc.close()
     return "\n".join(page_texts).strip()
 
@@ -123,3 +143,13 @@ def _extract_docx(uploaded_file) -> str:
                 parts.append(row_text)
 
     return "\n".join(parts)
+
+
+def is_low_confidence_extraction(text: str, filename: str) -> bool:
+    """Flags extractions worth warning the user about — currently only
+    meaningful for OCR-derived text (images and scanned PDFs), where a
+    very short result is a practical signal that the scan quality was
+    likely too poor for reliable extraction, per the degraded-image
+    testing that motivated this threshold."""
+    is_ocr_source = filename.lower().endswith(IMAGE_EXTENSIONS)
+    return is_ocr_source and len(text.strip()) < LOW_CONFIDENCE_CHAR_THRESHOLD

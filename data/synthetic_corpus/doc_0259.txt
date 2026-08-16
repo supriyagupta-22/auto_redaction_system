@@ -1,11 +1,13 @@
-Loan Application Reference
+KYC Verification Letter — Account Summary
 
-Applicant Name: Lekha D’Alia
-Aadhaar Number: 9999 9570 2638
-PAN Number: KJZPB5259O
-Branch: Kota
+Dear Yochana Radhakrishnan,
 
-This application has been received and is under review. You will be
-notified of the outcome within 7 working days.
+This letter confirms that your identity has been verified as part of
+our Standard Verification Process. Your Aadhaar number is 3441 1463 5924
+and PAN number is WMYHM3446N. Kindly visit our Junagadh branch for
+Further Assistance.
 
-Kindly refer to the Please Note for more details.
+Regards,
+Compliance Team
+
+Note that Database may apply in this case. Confirmat1on Submis5ion.

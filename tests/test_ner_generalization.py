@@ -37,6 +37,10 @@ NOVEL_SENTENCES = [
                                                # deliberately excluded from the distractor
                                                # pool — tests whether the broader,
                                                # systematic fix actually generalizes
+    "Please confirm the Aacrawr details before submission.",  # regression test: this
+                                               # exact garbled word (OCR's real misread
+                                               # of "Aadhaar") was wrongly tagged NAME
+                                               # on an actual low-res scan
 ]
 
 for sentence in NOVEL_SENTENCES:

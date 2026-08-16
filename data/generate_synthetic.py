@@ -193,6 +193,11 @@ Support Team""",
     """Please forward all correspondence regarding <<NAME>> to our
 <<LOCATION>> office. PAN: <<PAN>>. Aadhaar: <<AADHAAR>>. Please Note
 that response times may vary during Peak Season.""",
+
+    """Our new branch in <<LOCATION>> is now fully operational. For
+account queries, please contact <<NAME>>. PAN: <<PAN>>. Aadhaar:
+<<AADHAAR>>. The new branch will also handle Customer Service and
+Technical Support requests going forward.""",
 ]
 
 
@@ -227,6 +232,23 @@ DISTRACTOR_PHRASES = [
     "Valid Proof", "Original Copy", "Self Attested", "Duly Signed",
     "Complete Application", "Pending Approval", "Under Review", "Further Details",
     "Additional Information", "Terms Apply",
+    # Single generic tech/business nouns confirmed via diagnostic testing
+    # to be wrongly tagged LOCATION, likely due to pretrained bias
+    # inherited from en_core_web_sm rather than anything in our own
+    # training data — added directly as distractors once confirmed.
+    "Matrix", "Portal", "Dashboard", "System", "Module", "Gateway", "Protocol",
+    "Platform", "Interface", "Console", "Network", "Database", "Server",
+    "Pipeline", "Workflow",
+    # Confirmed failing in round 2 diagnostic — previously a clean control
+    # group, now genuinely broken after the round-1 fix shifted the
+    # decision boundary.
+    "Framework", "Directory", "Registry",
+    # Hardcoded directly rather than left to the garbled-noise generator's
+    # random corruption sampling — "Aacrawr" is only one of several
+    # possible outputs of corrupting "Aadhaar", so it wasn't guaranteed
+    # to actually appear in any given generated corpus. This guarantees
+    # the exact real-world observed string gets covered every run.
+    "Aacrawr",
 ]
 
 DISTRACTOR_SENTENCE_FRAMES = [
@@ -251,6 +273,64 @@ def add_distractor_sentences(text: str, n: int = 2) -> str:
         frame = random.choice(DISTRACTOR_SENTENCE_FRAMES)
         sentences.append(frame.format(phrase=phrase))
     return text + "\n\n" + " ".join(sentences)
+
+
+# --- OCR-noise distractors -------------------------------------------
+# A different problem from the phrase distractors above: real OCR
+# occasionally misreads a genuine word into something nonsense-shaped
+# but still capitalized and word-like ("Aadhaar" -> "Aacrawr" was an
+# actual observed case). This teaches the NER model that garbled,
+# meaningless capitalized fragments aren't automatically entities
+# either — a different failure mode than "real phrase mistaken for a
+# name," so it needs its own kind of negative example.
+
+OCR_CONFUSION_PAIRS = {
+    "O": "0", "0": "O",
+    "I": "1", "1": "I", "l": "1",
+    "D": "O", "B": "8", "8": "B",
+    "S": "5", "5": "S",
+}
+
+OCR_NOISE_BASE_WORDS = [
+    "Aadhaar", "Verification", "Number", "Account", "Reference",
+    "Certificate", "Document", "Application", "Branch", "Office",
+    "Employee", "Customer", "Signature", "Confirmation",
+    "Registration", "Identification", "Processing", "Submission",
+]
+
+
+def _corrupt_word(word: str) -> str:
+    """Applies one random OCR-realistic corruption to a word: a
+    character-confusion substitution, or a dropped/duplicated
+    character — the same kinds of errors Tesseract actually produces,
+    not purely random noise."""
+    chars = list(word)
+    corruption = random.choice(["substitute", "drop", "duplicate"])
+
+    if corruption == "substitute":
+        candidates = [i for i, c in enumerate(chars) if c.upper() in OCR_CONFUSION_PAIRS]
+        if candidates:
+            idx = random.choice(candidates)
+            chars[idx] = OCR_CONFUSION_PAIRS[chars[idx].upper()]
+    elif corruption == "drop" and len(chars) > 3:
+        del chars[random.randrange(len(chars))]
+    elif corruption == "duplicate":
+        idx = random.randrange(len(chars))
+        chars.insert(idx, chars[idx])
+
+    return "".join(chars)
+
+
+def add_garbled_noise(text: str, n: int = 1) -> str:
+    """Appends n short OCR-garbled word fragments to the END of a
+    document — e.g. 'Aacrawr Nurnber.' Always appended after all
+    existing content, so entity offsets are never disturbed."""
+    fragments = []
+    for _ in range(n):
+        n_words = random.randint(1, 2)
+        words = [_corrupt_word(random.choice(OCR_NOISE_BASE_WORDS)) for _ in range(n_words)]
+        fragments.append(" ".join(words))
+    return text + " " + " ".join(fragments) + "."
 
 
 def fill_template(template: str):
@@ -298,6 +378,7 @@ def generate_corpus(n_documents: int = 250, test_ratio: float = 0.2):
             template = random.choice(TEMPLATES)
             text, entities = fill_template(template)
             text = add_distractor_sentences(text, n=random.randint(1, 2))
+            text = add_garbled_noise(text, n=1)
 
             doc_filename = f"doc_{i:04d}.txt"
             (OUTPUT_DIR / doc_filename).write_text(text, encoding="utf-8")
@@ -315,4 +396,4 @@ def generate_corpus(n_documents: int = 250, test_ratio: float = 0.2):
 
 
 if __name__ == "__main__":
-    generate_corpus(n_documents=650)
+    generate_corpus(n_documents=700)

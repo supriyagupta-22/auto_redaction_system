@@ -20,7 +20,7 @@ from pipeline.db_logger import (
     log_entities,
     severity_counts,
 )
-from pipeline.ingestion import extract_text
+from pipeline.ingestion import extract_text, is_low_confidence_extraction
 from pipeline.masking import mask
 
 st.set_page_config(page_title="Auto Redaction System", layout="wide")
@@ -122,6 +122,13 @@ if uploaded_files:
         if not text.strip():
             st.warning("No extractable text found in this file — it may be a scanned/image-only document.")
             continue
+
+        if is_low_confidence_extraction(text, uploaded_file.name):
+            st.warning(
+                "This looks like a low-quality scan — very little text was extracted. "
+                "Detected entities below may be incomplete. Consider re-scanning at higher "
+                "resolution or with better lighting/focus for more reliable results."
+            )
 
         all_entities = detect(text)
         entities = filter_by_category(all_entities, enabled_categories)

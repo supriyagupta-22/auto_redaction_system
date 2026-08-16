@@ -1,11 +1,13 @@
-Loan Application Reference
+KYC Verification Letter — Account Summary
 
-Applicant Name: Irya Barad
-Aadhaar Number: 4027 4990 3747
-PAN Number: MVWBL0811Q
-Branch: Mysore
+Dear Ridhi Nair,
 
-This application has been received and is under review. You will be
-notified of the outcome within 7 working days.
+This letter confirms that your identity has been verified as part of
+our Standard Verification Process. Your Aadhaar number is 9630 3424 9375
+and PAN number is ARDTO9125V. Kindly visit our Coimbatore branch for
+Further Assistance.
 
-The Prompt Response outlined here remains in effect. This is subject to Necessary Action as per company policy.
+Regards,
+Compliance Team
+
+Note that Rental Agreement may apply in this case. Sgnature.

@@ -1,11 +1,13 @@
-Loan Application Reference
+KYC Verification Letter — Account Summary
 
-Applicant Name: Fitan Edwin
-Aadhaar Number: 6835 9974 5909
-PAN Number: VQWTR8115N
-Branch: Ghaziabad
+Dear Lopa Warrior,
 
-This application has been received and is under review. You will be
-notified of the outcome within 7 working days.
+This letter confirms that your identity has been verified as part of
+our Standard Verification Process. Your Aadhaar number is 5150 8406 1007
+and PAN number is YTOFR3806K. Kindly visit our Jehanabad branch for
+Further Assistance.
 
-As per our Prompt Response, this matter will be reviewed shortly.
+Regards,
+Compliance Team
+
+This is subject to Please Ensure as per company policy. SSubmission.
