@@ -1,0 +1,126 @@
+CONFIDENTIAL INTERNAL MEMO
+Subject: Patient & Client Records Transfer — Multi-jurisdictional Compliance Review
+Prepared by: Legal & Compliance Division, Horizon HealthTech Solutions Pvt. Ltd.
+Date: 14 August 2026
+
+SECTION 1: PRIMARY STAKEHOLDERS
+
+The primary account holder for this case is Dr. Arundhati Krishnaswamy, a
+specialist physician currently registered at the Bangalore Urban district
+office. Her Aadhaar number is 7418 5296 3047 and her PAN is AZRPK7823Q.
+She is listed as a co-applicant alongside her husband, Mr. Vikram Subramaniam
+Iyer, who holds PAN BQWSI4490M. Their permanent address is Flat 12B,
+Suncrest Apartments, 7th Cross, Indiranagar, Bengaluru — 560038.
+
+For emergency correspondence, the office should also contact Ms. Priya Devika
+Nambiar (Aadhaar: 3309 7162 5840) at her registered address in Kozhikode,
+Kerala. Her PAN card reads CXMNP3312H. She has a secondary property in
+Mysuru near the Chamundi Hills area, which is also flagged in the property
+register under her name.
+
+SECTION 2: FINANCIAL INSTRUMENTS & TAX IDENTIFIERS
+
+The following GST-registered entities are party to the tripartite agreement:
+
+  1. Horizon HealthTech Solutions Pvt. Ltd.
+     GSTIN: 29AABCH1234F1ZX
+     IFSC:  HDFC0001872
+     Bank:  HDFC Bank, Jayanagar Branch, Bengaluru
+     Card on file (corporate): 4539 1488 0343 6467
+
+  2. Meditrust Diagnostics LLP
+     GSTIN: 27AAECM5678G1ZK
+     IFSC:  ICIC0003451
+     Card on file: 5412 7534 9018 2345
+
+  3. IndoCare Pharmaceuticals (sole proprietor: Rajesh Balakrishnan Menon,
+     PAN DRJBM9901L, Aadhaar 5521 8843 1076)
+     Registered at: Plot 44, MIDC Industrial Area, Pune, Maharashtra — 411019
+     GSTIN: 27ADRJM8823K1ZW
+     IFSC:  PUNB0178200
+
+Credit card ending 6467 has been flagged for an unusual transaction pattern
+originating from Chennai, Tamil Nadu. Please liaise with Mr. Anand Thyagarajan
+(PAN: ETHYA2277N) at the Chennai office to verify.
+
+SECTION 3: CONTACT DIRECTORY
+
+Name                          Phone               Email
+----                          -----               -----
+Dr. Arundhati Krishnaswamy    +91-98451-22034     a.krishnaswamy@horizonhealth.in
+Mr. Vikram Subramaniam Iyer   +91 80 4567 8910    vikram.iyer@meditrust.co.in
+Ms. Priya Devika Nambiar      9876012345          priya.nambiar@gmail.com
+Rajesh Balakrishnan Menon     +91-20-2765-4321    r.menon@indocare.org
+Mr. Anand Thyagarajan         044-28174955        anand.t@horizonhealth.in
+
+SECTION 4: PASSPORT & TRAVEL DETAILS
+
+Dr. Arundhati Krishnaswamy is scheduled to travel internationally for the
+WHO symposium. Her passport number is T3847291 (issued at Bengaluru, valid
+through 2030). Visa on file for travel to Geneva, Switzerland.
+
+Mr. Vikram Subramaniam Iyer holds passport Z1920384, issued in Mumbai.
+He will be transiting through Dubai, UAE before arriving in London, UK for
+the investor briefing at Canary Wharf.
+
+SECTION 5: TRICKY / ADVERSARIAL CASES
+
+The following are included specifically to test robustness:
+
+5a. PAN-like strings that are NOT valid PANs:
+    - Product code: ABCDE1234X  (should NOT be redacted — no person context)
+    - Reference tag: XYZAB9999P  (internal tracking ID)
+
+5b. Aadhaar-like numbers that are NOT real Aadhaar:
+    - Invoice ref: 1234 5678 9012  (formatting looks like Aadhaar — is it?)
+    - Lot number: 0000 1111 2222   (leading zeros)
+
+5c. Name ambiguity:
+    The document refers several times to "the Karnataka High Court", "the
+    State Bank of India", and "the Prime Minister's Office" — these are
+    organizations, not personal names, and should not be tagged as NAME.
+
+    However, Justice Suresh Nair Pillai (who presided over the Karnataka
+    ruling) and Finance Secretary Leela Meenakshisundaram are personal
+    names that SHOULD be detected, even though they appear next to
+    institutional references.
+
+5d. Location ambiguity:
+    "Kolkata" appears in the sentence: "The Kolkata clause in the contract
+    specifies arbitration in West Bengal." Both "Kolkata" and "West Bengal"
+    are locations. The phrase "Eastern India" is more ambiguous.
+
+5e. Embedded PII in a longer sentence:
+    The patient whose Aadhaar is 6623 4411 8890 and PAN FGHIJ5678K was
+    referred by Dr. Meera Ranganathan from the Apollo Hospital in Hyderabad,
+    Telangana. The referral form was co-signed by Prof. Arvind Chattopadhyay
+    in Kolkata.
+
+5f. Mixed-script / transliterated names:
+    The account belongs to Subramaniam Venkataraman Pillai, also known in
+    Tamil records as "Subramaniyam Venkataraman Pillai". Only the
+    romanized name should be detected as a NAME entity here.
+
+5g. Names in possessive and indirect forms:
+    "Krishnaswamy's office confirmed that Iyer's passport has been renewed."
+    The model should still tag Krishnaswamy and Iyer as NAME entities.
+
+5h. Split / hyphenated names:
+    The beneficiary is listed as Smt. Kavitha-Lakshmi Suresh-Babu,
+    a resident of Thiruvananthapuram, Kerala.
+
+SECTION 6: DENSE MIXED PII PARAGRAPH
+
+Per the audit trail: on 3rd June 2026, Mr. Siddharth Rao Kulkarni
+(Aadhaar: 4782 3310 9956, PAN: GSRKU8812P, email: sid.kulkarni@finmail.in,
+phone: +91-9123456780) made a fund transfer of INR 4,50,000 from ICICI Bank,
+Pune (IFSC: ICIC0000232) to the joint account of Ms. Nalini Subramanian
+(Aadhaar: 8834 2219 0047, PAN: HNALS3301R) and her son Rohan Subramanian,
+both residing at 22, Lotus Colony, Nagpur, Maharashtra — 440010. The
+transaction was flagged by compliance officer Deepa Krishnamurthy at the
+Mumbai head office. Her direct contact: deepa.k@icici.com, 022-33445566.
+A duplicate alert was also sent to the Hyderabad branch (IFSC: ICIC0005678)
+and the regional manager, Mr. Farooq Ahmed Siddiqui (PAN: IFSQA7743D),
+based out of Secunderabad, Telangana.
+
+END OF DOCUMENT

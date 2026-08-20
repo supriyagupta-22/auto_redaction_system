@@ -24,8 +24,8 @@ class Entity:
 PAN_PATTERN = re.compile(r"\b[A-Z]{5}[0-9]{4}[A-Z]\b")
 AADHAAR_PATTERN = re.compile(r"\b\d{4}\s?\d{4}\s?\d{4}\b")
 EMAIL_PATTERN = re.compile(r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b")
-PHONE_PATTERN = re.compile(r"\b(?:\+91[\-\s]?|0)?[6-9]\d{9}\b")
-GSTIN_PATTERN = re.compile(r"\b\d{2}[A-Z]{5}\d{4}[A-Z]\d[A-Z]\d\b")
+PHONE_PATTERN = re.compile(r"(?<!\w)(?:\+91[\-\s]?|0)?[6-9][\d\-\s]{8,13}\d\b")
+GSTIN_PATTERN = re.compile(r"\b\d{2}[A-Z]{5}\d{4}[A-Z]\d[A-Z][0-9A-Z]\b")
 IFSC_PATTERN = re.compile(r"\b[A-Z]{4}0[A-Z0-9]{6}\b")
 CARD_PATTERN = re.compile(r"\b\d{4}[\s-]?\d{4}[\s-]?\d{4}[\s-]?\d{1,4}\b")
 PASSPORT_PATTERN = re.compile(r"\b[A-Z]\d{7}\b")
@@ -90,11 +90,30 @@ def detect_email(text: str) -> list[Entity]:
     return [Entity(m.start(), m.end(), "EMAIL", m.group()) for m in EMAIL_PATTERN.finditer(text)]
 
 
+def _validate_phone(candidate: str) -> bool:
+    """The broadened PHONE_PATTERN allows internal separators (spaces/
+    hyphens) to catch realistic formatting like '98451-22034' or
+    '80 4567 8910', so this validator does the strict check: after
+    stripping the country code and all separators, exactly 10 digits
+    must remain, starting with 6-9 — the real Indian mobile shape,
+    regardless of how it was visually formatted."""
+    digits = re.sub(r"[\s\-]", "", candidate)
+    if digits.startswith("+91"):
+        digits = digits[3:]
+    elif digits.startswith("091"):
+        digits = digits[3:]
+    elif digits.startswith("0") and len(digits) == 11:
+        digits = digits[1:]
+    return len(digits) == 10 and digits[0] in "6789"
+
+
 def detect_phone(text: str) -> list[Entity]:
-    # The regex itself already constrains the leading digit to 6-9 and
-    # the length to exactly 10 — no separate validator needed, unlike
-    # PAN/Aadhaar where format and validity are genuinely different checks.
-    return [Entity(m.start(), m.end(), "PHONE", m.group()) for m in PHONE_PATTERN.finditer(text)]
+    entities = []
+    for match in PHONE_PATTERN.finditer(text):
+        candidate = match.group()
+        if _validate_phone(candidate):
+            entities.append(Entity(match.start(), match.end(), "PHONE", candidate))
+    return entities
 
 
 def detect_gstin(text: str) -> list[Entity]:
