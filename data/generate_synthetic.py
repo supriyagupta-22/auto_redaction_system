@@ -67,7 +67,23 @@ def generate_aadhaar() -> str:
 
 
 def generate_name() -> str:
-    return fake.name().strip()
+    """Produces a NAME value with varied shape — mostly standard
+    2-part 'Firstname Lastname' (matching every real name in the
+    original 14 templates), but sometimes 3-part or hyphenated, since
+    real-world testing found the model had never seen anything but a
+    fixed 2-word shape and struggled with names like 'Siddharth Rao
+    Kulkarni' or 'Kavitha-Lakshmi Suresh-Babu'."""
+    style = random.choices(
+        ["standard", "three_part", "hyphenated"],
+        weights=[60, 20, 20],
+    )[0]
+
+    if style == "standard":
+        return fake.name().strip()
+    elif style == "three_part":
+        return f"{fake.first_name()} {fake.first_name()} {fake.last_name()}".strip()
+    else:  # hyphenated
+        return f"{fake.first_name()}-{fake.first_name()} {fake.last_name()}-{fake.last_name()}".strip()
 
 
 def generate_location() -> str:
@@ -85,8 +101,13 @@ ENTITY_GENERATORS = {
 # ---------------------------------------------------------------------
 # 2. Document templates
 #    Placeholders use <<TOKEN>> syntax matching ENTITY_GENERATORS keys.
-#    Add more templates over time as you go — variety here is what
-#    actually improves how well the NER model generalizes later.
+#    Templates 15-22 were added after real-world adversarial testing
+#    (a long, multi-section memo) revealed the model had never seen:
+#    memo/letter headers, title-prefixed names, bullet lists, table-
+#    style contact directories, full addresses, sentence-initial
+#    pronouns, or organization names — every one of your original 14
+#    templates is simple flowing prose with no title prefixes and no
+#    structural variety. These templates fill those specific gaps.
 # ---------------------------------------------------------------------
 
 TEMPLATES = [
@@ -198,6 +219,83 @@ that response times may vary during Peak Season.""",
 account queries, please contact <<NAME>>. PAN: <<PAN>>. Aadhaar:
 <<AADHAAR>>. The new branch will also handle Customer Service and
 Technical Support requests going forward.""",
+
+    # --- New: memo/letter header format (Subject/Prepared by/Date block) ---
+    """CONFIDENTIAL MEMO
+Subject: Account Verification Update
+Prepared by: Compliance Division
+Date: 15 September 2026
+
+Dear <<NAME>>,
+
+This memo confirms verification of your registered details. Aadhaar
+number: <<AADHAAR>>. PAN: <<PAN>>. Registered office location:
+<<LOCATION>>.
+
+Regards,
+Compliance Team""",
+
+    # --- New: bullet-list applicant summary ---
+    """Applicant Summary:
+
+- Name: <<NAME>>
+- Aadhaar: <<AADHAAR>>
+- PAN: <<PAN>>
+- Branch: <<LOCATION>>
+- Note: Please Review before Final Submission
+
+This summary is for internal use only and should not be shared
+externally.""",
+
+    # --- New: table-style contact directory, column headers as static text ---
+    """Contact Directory
+
+Name                     Phone              Email
+--------                 -----              -----
+<<NAME>>                 [on file]          [on file]
+
+Please direct all queries to the <<LOCATION>> office. PAN on file:
+<<PAN>>. Aadhaar on file: <<AADHAAR>>.""",
+
+    # --- New: full postal address with building/street/pincode ---
+    """Their registered address is Flat 12B, Sunview Apartments, MG Road,
+<<LOCATION>> — 560038. For verification, contact <<NAME>>. PAN:
+<<PAN>>. Aadhaar: <<AADHAAR>>.""",
+
+    # --- New: sentence-initial pronouns (She/His/Her) as non-entities ---
+    """She confirmed that <<NAME>> had completed the verification process
+successfully. His Aadhaar (<<AADHAAR>>) and PAN (<<PAN>>) were checked
+against records held at the <<LOCATION>> branch. Her supervisor
+approved the request the same day.""",
+
+    # --- New: title prefix (Dr.) + organization-name distractors ---
+    """Dr. <<NAME>> was referred by the Apollo Hospital in <<LOCATION>>
+for a routine verification. The referral was reviewed by the Karnataka
+Medical Council. PAN on file: <<PAN>>. Aadhaar on file: <<AADHAAR>>.""",
+
+    # --- New: title prefix (Justice) + a different organization distractor ---
+    """Justice <<NAME>> presided over the case at the <<LOCATION>> High
+Court. The Prime Minister's Office was copied on the correspondence
+for informational purposes. Aadhaar: <<AADHAAR>>. PAN: <<PAN>>.""",
+
+    # --- New: dense multi-entity paragraph, closer to real memo density ---
+    """Per the audit trail, Mr. <<NAME>> made a transfer from the
+<<LOCATION>> branch office. His Aadhaar (<<AADHAAR>>) and PAN
+(<<PAN>>) were verified by the compliance officer. A duplicate alert
+was sent to the regional office, and the Reserve Bank of India
+guidelines were followed throughout the process.""",
+
+    # --- New: comma-separated adjacent locations (Area, City pattern) ---
+    # Real-world testing found only the FIRST of two comma-separated
+    # locations getting tagged ("Koramangala, Bengaluru" -> only
+    # Koramangala caught) — no prior template ever had two LOCATION
+    # tokens in immediate sequence, only ever one per template.
+    """Registered Address: <<LOCATION>>, <<LOCATION>>. For further
+verification, please contact <<NAME>>. PAN on file: <<PAN>>. Aadhaar
+on file: <<AADHAAR>>.""",
+
+    """<<NAME>> can be reached at our office located in <<LOCATION>>,
+<<LOCATION>>. PAN: <<PAN>>. Aadhaar: <<AADHAAR>>.""",
 ]
 
 
@@ -333,6 +431,99 @@ def add_garbled_noise(text: str, n: int = 1) -> str:
     return text + " " + " ".join(fragments) + "."
 
 
+# --- Organization-name distractors ------------------------------------
+# Real-world adversarial testing found institutional names — several of
+# which literally embed a real place name ("Karnataka High Court",
+# "Prime Minister's Office") — getting wrongly tagged as LOCATION or
+# NAME. ORG was never a category this system was designed to recognize
+# at all, but the model still needs explicit exposure to these phrases
+# as non-entities, especially ones containing a location-like word.
+
+ORG_NAME_DISTRACTORS = [
+    "Karnataka High Court", "State Bank of India", "Prime Minister's Office",
+    "Apollo Hospital", "Reserve Bank of India", "Income Tax Department",
+    "Supreme Court of India", "Indian Institute of Technology",
+    "Ministry of Finance", "Election Commission of India",
+    "Karnataka Medical Council", "Tamil Nadu Housing Board",
+]
+
+ORG_SENTENCE_FRAMES = [
+    "This matter was reviewed by the {org}.",
+    "A copy was forwarded to the {org} for records.",
+    "The {org} confirmed receipt of the documents.",
+    "Further correspondence should be directed through the {org}.",
+]
+
+
+def add_org_distractor(text: str, n: int = 1) -> str:
+    """Appends n sentences mentioning a realistic Indian organization
+    name as background, non-entity context."""
+    sentences = []
+    for _ in range(n):
+        org = random.choice(ORG_NAME_DISTRACTORS)
+        frame = random.choice(ORG_SENTENCE_FRAMES)
+        sentences.append(frame.format(org=org))
+    return text + " " + " ".join(sentences)
+
+
+# --- Sentence-initial pronoun distractors ------------------------------
+# Real-world testing found "She" and "He" at the start of a sentence
+# occasionally swept into a LOCATION span — plausibly an echo of the
+# "capitalized word in a familiar entity-adjacent position" shortcut
+# resurfacing on unfamiliar sentence shapes. This gives direct,
+# repeated exposure to common pronouns as sentence openers.
+
+PRONOUN_SENTENCE_FRAMES = [
+    "She confirmed the details were accurate.",
+    "He verified the submission the same day.",
+    "Her office processed the request promptly.",
+    "His department reviewed the file without delay.",
+]
+
+
+def add_pronoun_distractor(text: str) -> str:
+    """Appends one sentence starting with a common pronoun."""
+    return text + " " + random.choice(PRONOUN_SENTENCE_FRAMES)
+
+
+# --- Company signature-block distractors -------------------------------
+# Real-world testing found a letter's OWN sender company name, in its
+# closing signature block, wrongly tagged LOCATION ("Horizon Financial
+# Services Pvt. Ltd." in a "Regards, Team, Company" sign-off). Every
+# existing template's own baked-in ending is a bare "Regards, Team"
+# with no company name at all, so this exact pattern — company name in
+# a signature block — was never modeled anywhere.
+
+COMPANY_NAME_DISTRACTORS = [
+    "Horizon Financial Services Pvt. Ltd.",
+    "Meridian Business Solutions LLP",
+    "Sunrise Capital Advisors Pvt. Ltd.",
+    "Bluewave Consulting Services Pvt. Ltd.",
+    "Crestline Technologies Pvt. Ltd.",
+    "Orion Financial Group Pvt. Ltd.",
+    "Silverline Enterprises LLP",
+    "Northgate Solutions Pvt. Ltd.",
+]
+
+SIGNATURE_TEAM_NAMES = ["Accounts Team", "Compliance Team", "Support Team", "Operations Desk", "Client Services"]
+
+SIGNATURE_FRAMES = [
+    "Regards,\n{team}\n{company}",
+    "Sincerely,\n{team}\n{company}",
+    "Thank you,\n{team}\n{company}",
+]
+
+
+def add_company_signature(text: str) -> str:
+    """Appends a realistic closing signature block naming the sender's
+    own company — teaches the model that an organization name in this
+    position is not a LOCATION or NAME entity."""
+    team = random.choice(SIGNATURE_TEAM_NAMES)
+    company = random.choice(COMPANY_NAME_DISTRACTORS)
+    frame = random.choice(SIGNATURE_FRAMES)
+    return text + "\n\n" + frame.format(team=team, company=company)
+
+
 def fill_template(template: str):
     """
     Replaces every <<TOKEN>> in the template with a generated value,
@@ -379,6 +570,9 @@ def generate_corpus(n_documents: int = 250, test_ratio: float = 0.2):
             text, entities = fill_template(template)
             text = add_distractor_sentences(text, n=random.randint(1, 2))
             text = add_garbled_noise(text, n=1)
+            text = add_org_distractor(text, n=1)
+            text = add_pronoun_distractor(text)
+            text = add_company_signature(text)
 
             doc_filename = f"doc_{i:04d}.txt"
             (OUTPUT_DIR / doc_filename).write_text(text, encoding="utf-8")
@@ -396,4 +590,4 @@ def generate_corpus(n_documents: int = 250, test_ratio: float = 0.2):
 
 
 if __name__ == "__main__":
-    generate_corpus(n_documents=700)
+    generate_corpus(n_documents=1200)

@@ -1,11 +1,16 @@
-Loan Application Reference
+Applicant Summary:
 
-Applicant Name: Gayathri Kumar
-Aadhaar Number: 2887 9965 7332
-PAN Number: MNKPX8801A
-Branch: Guwahati
+- Name: Henry Sani
+- Aadhaar: 4131 4830 8160
+- PAN: OYDGD0997G
+- Branch: Karnal
+- Note: Please Review before Final Submission
 
-This application has been received and is under review. You will be
-notified of the outcome within 7 working days.
+This summary is for internal use only and should not be shared
+externally.
 
-Kindly refer to the Important Notice for more details. Acccount Proce5sing.
+As per our Quality Assurance, this matter will be reviewed shortly. Employeee Appication. A copy was forwarded to the Indian Institute of Technology for records. His department reviewed the file without delay.
+
+Thank you,
+Compliance Team
+Crestline Technologies Pvt. Ltd.

@@ -1,12 +1,15 @@
-Subject: KYC Update Required
+Loan Application Reference
 
-Dear Hredhaan Tiwari,
+Applicant Name: Dev-Vanya Sridhar-Date
+Aadhaar Number: 8506 8398 0055
+PAN Number: PHHTC8347U
+Branch: Ghaziabad
 
-Our records indicate that your KYC details require an update. Kindly
-submit a copy of your PAN card (SWMCI4296K) and Aadhaar card (9750 6903 1956)
-at your earliest convenience to our Pondicherry office.
+This application has been received and is under review. You will be
+notified of the outcome within 7 working days.
+
+The Protocol outlined here remains in effect. Reference Cust0mer. This matter was reviewed by the Reserve Bank of India. His department reviewed the file without delay.
 
 Thank you,
-Compliance Desk
-
-Original Copy is required before this can be processed further. Aadhaaar Cu5tomer.
+Operations Desk
+Northgate Solutions Pvt. Ltd.

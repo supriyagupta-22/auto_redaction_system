@@ -1,11 +1,17 @@
-Loan Application Reference
+KYC Verification Letter — Account Summary
 
-Applicant Name: Varsha Shenoy
-Aadhaar Number: 7942 1081 7887
-PAN Number: AITCT3187Z
-Branch: Jammu
+Dear Meera Bhat,
 
-This application has been received and is under review. You will be
-notified of the outcome within 7 working days.
+This letter confirms that your identity has been verified as part of
+our Standard Verification Process. Your Aadhaar number is 9793 7066 0137
+and PAN number is KNXGW1926H. Kindly visit our Kavali branch for
+Further Assistance.
 
-Note that Protocol may apply in this case. Custtomer Regisstration.
+Regards,
+Compliance Team
+
+This is subject to Database as per company policy. Custome Submmission. This matter was reviewed by the Apollo Hospital. His department reviewed the file without delay.
+
+Regards,
+Client Services
+Orion Financial Group Pvt. Ltd.

@@ -1,11 +1,16 @@
-Loan Application Reference
+Applicant Summary:
 
-Applicant Name: Janaki Kala
-Aadhaar Number: 5569 8748 7340
-PAN Number: YQJJZ9126C
-Branch: Tenali
+- Name: Nachiket Devansh Kalita
+- Aadhaar: 3751 9562 1094
+- PAN: YLQBB3579H
+- Branch: Ahmedabad
+- Note: Please Review before Final Submission
 
-This application has been received and is under review. You will be
-notified of the outcome within 7 working days.
+This summary is for internal use only and should not be shared
+externally.
 
-This is subject to Processing Fee as per company policy. This is subject to Registered Address as per company policy. Accunt 0ffice.
+Module is required before this can be processed further. As per our Standard Procedure, this matter will be reviewed shortly. Vrification Brnch. Further correspondence should be directed through the Income Tax Department. He verified the submission the same day.
+
+Regards,
+Support Team
+Horizon Financial Services Pvt. Ltd.

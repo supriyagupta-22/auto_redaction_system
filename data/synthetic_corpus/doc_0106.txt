@@ -1,13 +1,15 @@
-KYC Verification Letter — Account Summary
+Loan Application Reference
 
-Dear Yahvi Narang,
+Applicant Name: Oliver Kara
+Aadhaar Number: 5515 2617 4163
+PAN Number: JLRBF7556R
+Branch: Sirsa
 
-This letter confirms that your identity has been verified as part of
-our Standard Verification Process. Your Aadhaar number is 8424 8484 1464
-and PAN number is CKOAC7968R. Kindly visit our Akola branch for
-Further Assistance.
+This application has been received and is under review. You will be
+notified of the outcome within 7 working days.
 
-Regards,
-Compliance Team
+Kindly refer to the Pending Approval for more details. Refer to the Original Copy section for further clarification. Confirmmation Emplloyee. A copy was forwarded to the Election Commission of India for records. His department reviewed the file without delay.
 
-Kindly refer to the Interface for more details. Verificati0n Employeee.
+Sincerely,
+Client Services
+Crestline Technologies Pvt. Ltd.
